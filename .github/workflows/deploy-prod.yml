@@ -1,0 +1,178 @@
+name: CI & Déploiement
+
+on:
+    push:
+        tags:
+            - 'v*.*.*'
+
+jobs:
+    ci:
+        name: Tests & vérifications
+        runs-on: ubuntu-latest
+
+        env:
+            # Aucune vraie base n'est nécessaire pour ces vérifications : le
+            # DBAL de Doctrine ne se connecte pas tant qu'aucune requête
+            # n'est exécutée, il faut juste une DSN valide pour que le
+            # container se compile.
+            DATABASE_URL: "mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+
+        steps:
+            # =========================
+            # CHECKOUT
+            # =========================
+
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            # =========================
+            # PHP
+            # =========================
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.4"
+                  extensions: mbstring,intl,pdo_mysql
+                  coverage: none
+
+            - name: Validate composer.json
+              run: composer validate --no-check-publish
+
+            - name: Install Composer dependencies
+              run: composer install --no-interaction --prefer-dist --no-progress
+
+            # =========================
+            # NODE / ASSETS
+            # =========================
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+
+            - name: Install npm dependencies
+              run: npm ci
+
+            - name: Build assets
+              run: npm run build
+
+            # =========================
+            # SYMFONY CHECKS
+            # =========================
+
+            - name: Symfony container lint
+              run: php bin/console lint:container --env=prod
+
+            - name: Symfony twig lint
+              run: php bin/console lint:twig templates --env=prod
+
+            - name: Symfony yaml lint
+              run: php bin/console lint:yaml config --env=prod
+
+            # =========================
+            # TESTS
+            # =========================
+
+            - name: PHPUnit
+              run: php bin/phpunit --fail-on-warning --fail-on-risky
+
+    deploy:
+        name: Déploiement production
+        needs: ci
+        runs-on: ubuntu-latest
+
+        env:
+            APP_ENV: prod
+
+        steps:
+            # =========================
+            # CHECKOUT
+            # =========================
+
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            # =========================
+            # PHP
+            # =========================
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.4"
+                  extensions: mbstring,intl,pdo_mysql
+                  coverage: none
+
+            - name: Install Composer dependencies
+              run: |
+                  composer install \
+                    --no-dev \
+                    --prefer-dist \
+                    --optimize-autoloader \
+                    --classmap-authoritative \
+                    --no-interaction \
+                    --no-progress
+
+            # =========================
+            # NODE
+            # =========================
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+
+            - name: Install npm dependencies
+              run: npm ci
+
+            - name: Build assets
+              run: npm run build
+
+            # =========================
+            # CLEAN CACHE
+            # =========================
+
+            - name: Remove local cache
+              run: rm -rf var/cache/*
+
+            # =========================
+            # DEPLOY VIA FTP
+            # =========================
+
+            - name: FTP Deploy
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+              with:
+                  server: ftp.cluster129.hosting.ovh.net
+                  username: ${{ secrets.OVH_USER }}
+                  password: ${{ secrets.OVH_PASSWORD }}
+
+                  protocol: ftp
+                  port: 21
+
+                  local-dir: ./
+                  server-dir: /sk-systems/
+
+                  dangerous-clean-slate: false
+
+                  exclude: |
+                      **/.git*
+                      **/.github/**
+                      **/node_modules/**
+                      **/tests/**
+                      **/var/cache/**
+                      **/var/log/**
+                      **/.env
+                      **/.env.local
+                      **/.DS_Store
+                      README.md
+
+            # =========================
+            # CLEAR SYMFONY CACHE
+            # =========================
+
+            - name: Clear production cache
+              run: |
+                  curl -fsSL "https://sksystems.fr/_deploy.php?token=${{ secrets.DEPLOY_TOKEN }}"
