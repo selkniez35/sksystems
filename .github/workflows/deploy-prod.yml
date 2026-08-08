@@ -78,101 +78,65 @@ jobs:
             - name: PHPUnit
               run: php bin/phpunit --fail-on-warning --fail-on-risky
 
-    deploy:
-        name: Déploiement production
+    deploy-prod:
+        name: Déploiement production (VPS)
         needs: ci
-        runs-on: ubuntu-latest
-
-        env:
-            APP_ENV: prod
+        runs-on: self-hosted
+        concurrency:
+            group: prod-deploy
+            cancel-in-progress: false
 
         steps:
             # =========================
             # CHECKOUT
             # =========================
 
-            - name: Checkout
+            - name: Checkout du tag
               uses: actions/checkout@v4
-
-            # =========================
-            # PHP
-            # =========================
-
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
               with:
-                  php-version: "8.4"
-                  extensions: mbstring,intl,pdo_mysql
-                  coverage: none
+                  fetch-depth: 0
 
-            - name: Install Composer dependencies
+            # =========================
+            # SECURITE : tag issu de main
+            # =========================
+
+            - name: Vérifier que le tag est sur main
+              id: check
               run: |
-                  composer install \
-                    --no-dev \
-                    --prefer-dist \
-                    --optimize-autoloader \
-                    --classmap-authoritative \
-                    --no-interaction \
-                    --no-progress
+                  git fetch origin main --quiet
+                  if git merge-base --is-ancestor HEAD origin/main; then
+                    echo "on_main=true" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "on_main=false" >> "$GITHUB_OUTPUT"
+                    echo "Tag non issu de main, déploiement prod ignoré."
+                  fi
 
             # =========================
-            # NODE
+            # SECRETS PROD
             # =========================
 
-            - name: Setup Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 22
-                  cache: npm
-
-            - name: Install npm dependencies
-              run: npm ci
-
-            - name: Build assets
-              run: npm run build
+            - name: Récupérer le .env.local de prod
+              if: steps.check.outputs.on_main == 'true'
+              run: cp /opt/sksystems/.env.local .env.local
 
             # =========================
-            # CLEAN CACHE
+            # DEPLOY VIA DOCKER COMPOSE
             # =========================
 
-            - name: Remove local cache
-              run: rm -rf var/cache/*
-
-            # =========================
-            # DEPLOY VIA FTP
-            # =========================
-
-            - name: FTP Deploy
-              uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-              with:
-                  server: ftp.cluster129.hosting.ovh.net
-                  username: ${{ secrets.OVH_USER }}
-                  password: ${{ secrets.OVH_PASSWORD }}
-
-                  protocol: ftp
-                  port: 21
-
-                  local-dir: ./
-                  server-dir: /sk-systems/
-
-                  dangerous-clean-slate: false
-
-                  exclude: |
-                      **/.git*
-                      **/.github/**
-                      **/node_modules/**
-                      **/tests/**
-                      **/var/cache/**
-                      **/var/log/**
-                      **/.env
-                      **/.env.local
-                      **/.DS_Store
-                      README.md
-
-            # =========================
-            # CLEAR SYMFONY CACHE
-            # =========================
-
-            - name: Clear production cache
+            - name: Déployer sur le VPS
+              if: steps.check.outputs.on_main == 'true'
               run: |
-                  curl -fsSL "https://sksystems.fr/_deploy.php?token=${{ secrets.DEPLOY_TOKEN }}"
+                  docker compose --env-file .env.local -f docker-compose.prod.yml up -d --build
+                  docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app php bin/console doctrine:migrations:migrate --no-interaction
+                  docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app php bin/console cache:clear --env=prod
+                  docker image prune -f
+
+            # =========================
+            # MISE A JOUR DU CLONE /opt (diagnostic/backup)
+            # =========================
+
+            - name: Mettre à jour le clone /opt
+              if: steps.check.outputs.on_main == 'true'
+              run: |
+                  git -C /opt/sksystems fetch --tags --quiet
+                  git -C /opt/sksystems checkout "$GITHUB_REF_NAME"

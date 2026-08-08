@@ -1,0 +1,7 @@
+sksystems.fr {
+    reverse_proxy app:10000
+}
+
+www.sksystems.fr {
+    redir https://sksystems.fr{uri} permanent
+}
