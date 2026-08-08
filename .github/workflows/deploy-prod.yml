@@ -127,7 +127,11 @@ jobs:
               if: steps.check.outputs.on_main == 'true'
               run: |
                   docker compose --env-file .env.local -f docker-compose.prod.yml up -d --build
-                  docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app php bin/console doctrine:migrations:migrate --no-interaction
+                  if docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app sh -c 'ls migrations/Version*.php 2>/dev/null | grep -q .'; then
+                    docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app php bin/console doctrine:migrations:migrate --no-interaction
+                  else
+                    echo "Aucune migration enregistrée, étape ignorée."
+                  fi
                   docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app php bin/console cache:clear --env=prod
                   docker image prune -f
 
