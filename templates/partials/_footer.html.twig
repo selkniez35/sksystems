@@ -1,0 +1,41 @@
+<footer id="contact" class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-cta text-center">
+            <h2 class="fw-bold">Un projet en tête ?</h2>
+            <p class="text-light opacity-75">
+                Parlons de vos besoins et voyons comment SK Systems peut vous aider à le concrétiser.
+            </p>
+            <a href="mailto:samy.elkniez@sksystems.fr" class="btn btn-primary btn-lg mt-2">
+                samy.elkniez@sksystems.fr
+            </a>
+        </div>
+
+        <hr class="footer-divider">
+
+        <div class="footer-bottom">
+
+            <div class="footer-brand">
+                <img src="{{ asset('images/logos/sk-logo-sombre.png') }}" alt="SK Systems" height="36">
+                <p class="text-light opacity-50 mb-0">Développeur Symfony freelance</p>
+            </div>
+
+            <ul class="footer-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#tarifs">Tarifs</a></li>
+                <li><a href="#pourquoi">Pourquoi nous</a></li>
+                <li><a href="{{ path('app_legal_notice') }}">Mentions légales</a></li>
+                <li><a href="{{ path('app_terms_of_sale') }}">CGV</a></li>
+            </ul>
+
+            <p class="footer-copy text-light opacity-50 mb-0">
+                &copy; {{ "now"|date("Y") }} SK Systems. Tous droits réservés.
+                SIRET 852 457 878 00043.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>

@@ -1,8 +1,8 @@
-import './styles/app.css';
-import './styles/home.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+import './styles/app.css';
+import './styles/home.css';
 
 console.log('SK Systems loaded');
 /*

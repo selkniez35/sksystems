@@ -1,4 +1,4 @@
-name: Deploy Production
+name: CI & Déploiement
 
 on:
     push:
@@ -6,11 +6,16 @@ on:
             - 'v*.*.*'
 
 jobs:
-    deploy:
+    ci:
+        name: Tests & vérifications
         runs-on: ubuntu-latest
 
         env:
-            APP_ENV: prod
+            # Aucune vraie base n'est nécessaire pour ces vérifications : le
+            # DBAL de Doctrine ne se connecte pas tant qu'aucune requête
+            # n'est exécutée, il faut juste une DSN valide pour que le
+            # container se compile.
+            DATABASE_URL: "mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
 
         steps:
             # =========================
@@ -31,18 +36,14 @@ jobs:
                   extensions: mbstring,intl,pdo_mysql
                   coverage: none
 
+            - name: Validate composer.json
+              run: composer validate --no-check-publish
+
             - name: Install Composer dependencies
-              run: |
-                  composer install \
-                    --no-dev \
-                    --prefer-dist \
-                    --optimize-autoloader \
-                    --classmap-authoritative \
-                    --no-interaction \
-                    --no-progress
+              run: composer install --no-interaction --prefer-dist --no-progress
 
             # =========================
-            # NODE
+            # NODE / ASSETS
             # =========================
 
             - name: Setup Node
@@ -58,47 +59,84 @@ jobs:
               run: npm run build
 
             # =========================
-            # CLEAN CACHE
+            # SYMFONY CHECKS
             # =========================
 
-            - name: Remove local cache
-              run: rm -rf var/cache/*
+            - name: Symfony container lint
+              run: php bin/console lint:container --env=prod
+
+            - name: Symfony twig lint
+              run: php bin/console lint:twig templates --env=prod
+
+            - name: Symfony yaml lint
+              run: php bin/console lint:yaml config --env=prod
 
             # =========================
-            # DEPLOY VIA FTP
+            # TESTS
             # =========================
 
-            - name: FTP Deploy
-              uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+            - name: PHPUnit
+              run: php bin/phpunit --fail-on-warning --fail-on-risky
+
+    deploy-prod:
+        name: Déploiement production (VPS)
+        needs: ci
+        runs-on: self-hosted
+        concurrency:
+            group: prod-deploy
+            cancel-in-progress: false
+
+        steps:
+            # =========================
+            # CHECKOUT
+            # =========================
+
+            - name: Checkout du tag
+              uses: actions/checkout@v4
               with:
-                  server: ftp.cluster129.hosting.ovh.net
-                  username: ${{ secrets.OVH_USER }}
-                  password: ${{ secrets.OVH_PASSWORD }}
-
-                  protocol: ftp
-                  port: 21
-
-                  local-dir: ./
-                  server-dir: /sk-systems/
-
-                  dangerous-clean-slate: false
-
-                  exclude: |
-                      **/.git*
-                      **/.github/**
-                      **/node_modules/**
-                      **/tests/**
-                      **/var/cache/**
-                      **/var/log/**
-                      **/.env
-                      **/.env.local
-                      **/.DS_Store
-                      README.md
+                  fetch-depth: 0
 
             # =========================
-            # CLEAR SYMFONY CACHE
+            # SECURITE : tag issu de main
             # =========================
 
-            - name: Clear production cache
+            - name: Vérifier que le tag est sur main
+              id: check
               run: |
-                  curl -fsSL "https://sksystems.fr/_deploy.php?token=${{ secrets.DEPLOY_TOKEN }}"
+                  git fetch origin main --quiet
+                  if git merge-base --is-ancestor HEAD origin/main; then
+                    echo "on_main=true" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "on_main=false" >> "$GITHUB_OUTPUT"
+                    echo "Tag non issu de main, déploiement prod ignoré."
+                  fi
+
+            # =========================
+            # SECRETS PROD
+            # =========================
+
+            - name: Récupérer le .env.local de prod
+              if: steps.check.outputs.on_main == 'true'
+              run: cp /opt/sksystems/.env.local .env.local
+
+            # =========================
+            # DEPLOY VIA DOCKER COMPOSE
+            # =========================
+
+            - name: Déployer sur le VPS
+              if: steps.check.outputs.on_main == 'true'
+              run: |
+                  docker compose --env-file .env.local -f docker-compose.prod.yml up -d --build
+                  docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app php bin/console doctrine:migrations:migrate --no-interaction
+                  docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app php bin/console cache:clear --env=prod
+                  docker image prune -f
+
+            # =========================
+            # MISE A JOUR DU CLONE /opt (diagnostic/backup)
+            # =========================
+
+            - name: Mettre à jour le clone /opt
+              if: steps.check.outputs.on_main == 'true'
+              run: |
+                  git -C /opt/sksystems fetch --tags --quiet
+                  git -C /opt/sksystems checkout "$GITHUB_REF_NAME"
