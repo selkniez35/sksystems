@@ -77,6 +77,13 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
+@media (max-width: 575.98px) {
+    .navbar-brand img {
+        max-height: 32px;
+        width: auto;
+    }
+}
+
 .site-navbar .nav-link {
     color: rgba(255, 255, 255, .75) !important;
     font-weight: 500;
@@ -111,6 +118,24 @@ main {
     font-size: 2rem;
 }
 
+@media (max-width: 767.98px) {
+    .site-footer {
+        padding: 3.5rem 0 1.5rem;
+    }
+
+    .footer-cta h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .footer-cta .btn {
+        overflow-wrap: break-word;
+        white-space: normal;
+        font-size: .95rem;
+    }
+}
+
 .footer-divider {
     border-color: rgba(255, 255, 255, .1);
     margin: 3.5rem 0 2rem;
@@ -122,6 +147,19 @@ main {
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
+}
+
+@media (max-width: 575.98px) {
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .footer-brand img {
+        max-height: 28px;
+        width: auto;
+    }
 }
 
 .footer-brand p {
