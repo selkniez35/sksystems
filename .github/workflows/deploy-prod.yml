@@ -1,0 +1,142 @@
+name: CI & Déploiement
+
+on:
+    push:
+        tags:
+            - 'v*.*.*'
+
+jobs:
+    ci:
+        name: Tests & vérifications
+        runs-on: ubuntu-latest
+
+        env:
+            # Aucune vraie base n'est nécessaire pour ces vérifications : le
+            # DBAL de Doctrine ne se connecte pas tant qu'aucune requête
+            # n'est exécutée, il faut juste une DSN valide pour que le
+            # container se compile.
+            DATABASE_URL: "mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4"
+
+        steps:
+            # =========================
+            # CHECKOUT
+            # =========================
+
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            # =========================
+            # PHP
+            # =========================
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.4"
+                  extensions: mbstring,intl,pdo_mysql
+                  coverage: none
+
+            - name: Validate composer.json
+              run: composer validate --no-check-publish
+
+            - name: Install Composer dependencies
+              run: composer install --no-interaction --prefer-dist --no-progress
+
+            # =========================
+            # NODE / ASSETS
+            # =========================
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+
+            - name: Install npm dependencies
+              run: npm ci
+
+            - name: Build assets
+              run: npm run build
+
+            # =========================
+            # SYMFONY CHECKS
+            # =========================
+
+            - name: Symfony container lint
+              run: php bin/console lint:container --env=prod
+
+            - name: Symfony twig lint
+              run: php bin/console lint:twig templates --env=prod
+
+            - name: Symfony yaml lint
+              run: php bin/console lint:yaml config --env=prod
+
+            # =========================
+            # TESTS
+            # =========================
+
+            - name: PHPUnit
+              run: php bin/phpunit --fail-on-warning --fail-on-risky
+
+    deploy-prod:
+        name: Déploiement production (VPS)
+        needs: ci
+        runs-on: self-hosted
+        concurrency:
+            group: prod-deploy
+            cancel-in-progress: false
+
+        steps:
+            # =========================
+            # CHECKOUT
+            # =========================
+
+            - name: Checkout du tag
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            # =========================
+            # SECURITE : tag issu de main
+            # =========================
+
+            - name: Vérifier que le tag est sur main
+              id: check
+              run: |
+                  git fetch origin main --quiet
+                  if git merge-base --is-ancestor HEAD origin/main; then
+                    echo "on_main=true" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "on_main=false" >> "$GITHUB_OUTPUT"
+                    echo "Tag non issu de main, déploiement prod ignoré."
+                  fi
+
+            # =========================
+            # SECRETS PROD
+            # =========================
+
+            - name: Récupérer le .env.local de prod
+              if: steps.check.outputs.on_main == 'true'
+              run: cp /opt/sksystems/.env.local .env.local
+
+            # =========================
+            # DEPLOY VIA DOCKER COMPOSE
+            # =========================
+
+            - name: Déployer sur le VPS
+              if: steps.check.outputs.on_main == 'true'
+              run: |
+                  docker compose --env-file .env.local -f docker-compose.prod.yml up -d --build
+                  docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app php bin/console doctrine:migrations:migrate --no-interaction
+                  docker compose --env-file .env.local -f docker-compose.prod.yml exec -T app php bin/console cache:clear --env=prod
+                  docker image prune -f
+
+            # =========================
+            # MISE A JOUR DU CLONE /opt (diagnostic/backup)
+            # =========================
+
+            - name: Mettre à jour le clone /opt
+              if: steps.check.outputs.on_main == 'true'
+              run: |
+                  git -C /opt/sksystems fetch --tags --quiet
+                  git -C /opt/sksystems checkout "$GITHUB_REF_NAME"
