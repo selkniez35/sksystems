@@ -10,6 +10,12 @@
         </title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="SK Systems - Développeur Symfony freelance : sites web, applications métiers et MVP sur mesure.">
+        <link rel="icon" href="{{ asset('images/logos/sk-favicon-clair.png') }}" type="image/png">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -19,8 +25,7 @@
 
     <body>
 
-        {#{% include 'partials/_navbar.html.twig' %}#}
-
+        {% include 'partials/_navbar.html.twig' %}
 
         <main>
 
@@ -28,7 +33,7 @@
 
         </main>
 
-        {#{% include 'partials/_footer.html.twig' %}#}
+        {% include 'partials/_footer.html.twig' %}
 
         {% block javascripts %}
 
