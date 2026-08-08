@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conditions Générales de Vente - SK Systems{% endblock %}
+
+{% block body %}
+
+    <section class="py-5 py-lg-6">
+        <div class="container" style="max-width: 860px;">
+
+            <div class="mb-5">
+                <span class="section-eyebrow">Conditions générales</span>
+                <h1 class="fw-bold">Conditions Générales de Vente</h1>
+                <p class="text-muted mt-2">En vigueur au {{ "now"|date("d/m/Y") }}</p>
+            </div>
+
+            <h2 class="h4 fw-bold mt-5">Article 1 – Objet</h2>
+            <p class="text-muted">
+                Les présentes conditions générales de vente (CGV) régissent les relations contractuelles
+                entre SK Systems, micro-entreprise représentée par Samy EL KNIEZ (SIRET 852 457 878 00043),
+                14 Square de Tanouarn, 35700 Rennes, et tout client professionnel ou particulier souhaitant
+                faire appel à ses services de développement web et d'applications.
+            </p>
+
+            <h2 class="h4 fw-bold mt-5">Article 2 – Prestations proposées</h2>
+            <p class="text-muted">
+                SK Systems propose des prestations de développement web et d'applications métiers
+                (création de sites, applications Symfony/PHP, MVP), facturées :
+            </p>
+            <ul class="text-muted">
+                <li>au taux journalier moyen (TJM) affiché sur le site, pour les missions au temps passé ;</li>
+                <li>au forfait, sur devis préalable, pour les projets à périmètre défini.</li>
+            </ul>
+
+            <h2 class="h4 fw-bold mt-5">Article 3 – Devis et commande</h2>
+            <p class="text-muted">
+                Toute prestation fait l'objet d'un devis gratuit détaillant la nature des prestations,
+                leur prix et les délais estimés. La commande est considérée comme définitive à réception
+                du devis signé (ou de l'accord écrit du client) et, le cas échéant, du versement de
+                l'acompte prévu.
+            </p>
+
+            <h2 class="h4 fw-bold mt-5">Article 4 – Tarifs et modalités de paiement</h2>
+            <p class="text-muted">
+                Les prix sont exprimés en euros. SK Systems, en franchise en base de TVA, applique une
+                TVA non applicable conformément à l'article 293 B du Code général des impôts. Sauf
+                accord contraire mentionné au devis, le paiement s'effectue par virement bancaire ou via
+                Revolut Business, selon les modalités suivantes :
+            </p>
+            <ul class="text-muted">
+                <li>un acompte de 30 % à la commande ;</li>
+                <li>le solde à la livraison de la prestation, sauf échéancier différent prévu au devis.</li>
+            </ul>
+            <p class="text-muted">
+                Conformément à l'article L441-10 du Code de commerce, tout retard de paiement entraîne
+                de plein droit l'application d'une pénalité calculée au taux d'intérêt de la Banque
+                centrale européenne majoré de 10 points, ainsi qu'une indemnité forfaitaire pour frais de
+                recouvrement de 40 €.
+            </p>
+
+            <h2 class="h4 fw-bold mt-5">Article 5 – Délais de réalisation</h2>
+            <p class="text-muted">
+                Les délais indiqués au devis sont donnés à titre indicatif et courent à compter de la
+                réception de l'ensemble des éléments nécessaires à la réalisation de la prestation
+                (contenus, accès, validations). Ils peuvent être adaptés en cas de modification du
+                périmètre du projet en cours de mission.
+            </p>
+
+            <h2 class="h4 fw-bold mt-5">Article 6 – Obligations du prestataire</h2>
+            <p class="text-muted">
+                SK Systems s'engage à réaliser les prestations commandées avec soin et selon les règles
+                de l'art, en tenant le client informé de l'avancement du projet.
+            </p>
+
+            <h2 class="h4 fw-bold mt-5">Article 7 – Obligations du client</h2>
+            <p class="text-muted">
+                Le client s'engage à fournir à SK Systems l'ensemble des informations, contenus et accès
+                nécessaires à la bonne exécution de la prestation, et à valider les livrables dans un
+                délai raisonnable.
+            </p>
+
+            <h2 class="h4 fw-bold mt-5">Article 8 – Propriété intellectuelle</h2>
+            <p class="text-muted">
+                Le transfert de propriété intellectuelle du code développé et des livrables au client est
+                effectif après paiement intégral de la prestation, sauf disposition contraire prévue au
+                devis. SK Systems conserve le droit de faire état de la réalisation à titre de référence,
+                sauf opposition écrite du client.
+            </p>
+
+            <h2 class="h4 fw-bold mt-5">Article 9 – Responsabilité</h2>
+            <p class="text-muted">
+                SK Systems ne pourra être tenu responsable des dommages indirects, pertes d'exploitation
+                ou pertes de données résultant de l'utilisation des livrables. Sa responsabilité, en cas
+                de manquement avéré, est limitée au montant effectivement perçu au titre de la prestation
+                concernée.
+            </p>
+
+            <h2 class="h4 fw-bold mt-5">Article 10 – Résiliation</h2>
+            <p class="text-muted">
+                En cas d'annulation d'une commande par le client après le début de la prestation,
+                l'acompte versé reste acquis à SK Systems et les travaux déjà réalisés sont facturés au
+                prorata du temps passé ou de l'avancement du forfait.
+            </p>
+
+            <h2 class="h4 fw-bold mt-5">Article 11 – Litiges et droit applicable</h2>
+            <p class="text-muted">
+                Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable
+                sera recherchée en priorité. À défaut d'accord, les tribunaux compétents de Rennes seront
+                seuls compétents.
+            </p>
+
+        </div>
+    </section>
+
+{% endblock %}
