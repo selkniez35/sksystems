@@ -45,8 +45,8 @@
                             <div class="stat-label">Du concept au produit</div>
                         </div>
                         <div>
-                            <div class="stat-value">300€</div>
-                            <div class="stat-label">HT / jour</div>
+                            <div class="stat-value">Rennes</div>
+                            <div class="stat-label">Bretagne &amp; à distance partout en France</div>
                         </div>
                     </div>
 
@@ -132,6 +132,71 @@
         </div>
     </section>
 
+    {% include 'partials/_projects.html.twig' %}
+
+    {% include 'partials/_parcours.html.twig' %}
+
+    {% include 'partials/_recommendations.html.twig' %}
+
+    <section id="pourquoi" class="py-5 py-lg-6 why-section">
+        <div class="container">
+
+            <div class="text-center mb-4">
+                <span class="section-eyebrow">Pourquoi SK Systems ?</span>
+                <h2 class="fw-bold">Une approche exigeante</h2>
+                <p class="lead text-muted mt-3">
+                    Une approche basée sur la qualité du code,
+                    la performance et la simplicité.
+                </p>
+            </div>
+
+            <div class="row g-4 text-center justify-content-center">
+
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <div class="icon">🧩</div>
+                        <h5>Code propre</h5>
+                        <p>Un code lisible, testé et maintenable sur le long terme.</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <div class="icon">⚡</div>
+                        <h5>Performance</h5>
+                        <p>Des applications rapides, optimisées et sécurisées.</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <div class="icon">💬</div>
+                        <h5>Communication directe</h5>
+                        <p>Un interlocuteur unique, disponible du début à la livraison.</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <div class="icon">⏱️</div>
+                        <h5>Délais respectés</h5>
+                        <p>Un suivi rigoureux pour livrer dans les temps annoncés.</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="feature-item">
+                        <div class="icon">🤖</div>
+                        <h5>IA au quotidien</h5>
+                        <p>J'utilise l'IA pour accélérer certains développements — un assistant, jamais un remplaçant : conception, choix techniques et relecture restent humains.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
     <section id="tarifs" class="py-5 py-lg-6 pricing-section">
         <div class="container">
 
@@ -184,62 +249,13 @@
 
             <div class="text-center mt-5">
                 <span class="hero-badge badge-light">
-                    Paiement par virement (Revolut) — bientôt disponible
+                    Paiement par virement (Revolut) disponible
                 </span>
             </div>
 
         </div>
     </section>
 
-    <section id="pourquoi" class="py-5 py-lg-6 why-section">
-        <div class="container">
-
-            <div class="text-center mb-4">
-                <span class="section-eyebrow">Pourquoi SK Systems ?</span>
-                <h2 class="fw-bold">Une approche exigeante</h2>
-                <p class="lead text-muted mt-3">
-                    Une approche basée sur la qualité du code,
-                    la performance et la simplicité.
-                </p>
-            </div>
-
-            <div class="row g-4 text-center">
-
-                <div class="col-6 col-lg-3">
-                    <div class="feature-item">
-                        <div class="icon">🧩</div>
-                        <h5>Code propre</h5>
-                        <p>Un code lisible, testé et maintenable sur le long terme.</p>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="feature-item">
-                        <div class="icon">⚡</div>
-                        <h5>Performance</h5>
-                        <p>Des applications rapides, optimisées et sécurisées.</p>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="feature-item">
-                        <div class="icon">💬</div>
-                        <h5>Communication directe</h5>
-                        <p>Un interlocuteur unique, disponible du début à la livraison.</p>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="feature-item">
-                        <div class="icon">⏱️</div>
-                        <h5>Délais respectés</h5>
-                        <p>Un suivi rigoureux pour livrer dans les temps annoncés.</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
+    {% include 'partials/_contact.html.twig' %}
 
 {% endblock %}

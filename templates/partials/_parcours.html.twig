@@ -1,0 +1,58 @@
+{% if experiences is defined and experiences|length > 0 %}
+    <section id="parcours" class="py-5 py-lg-6 parcours-section">
+        <div class="container">
+
+            <div class="text-center mb-5">
+                <span class="section-eyebrow">Mon parcours</span>
+                <h2 class="fw-bold">Expériences &amp; formation</h2>
+            </div>
+
+            <div class="row g-5">
+
+                <div class="col-lg-8">
+                    <h4 class="parcours-subtitle">Expériences</h4>
+
+                    <div class="timeline">
+                        {% for exp in experiences %}
+                            <div class="timeline-item {{ exp.current ? 'timeline-item--current' : '' }}">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-header">
+                                        <h5>{{ exp.title }}</h5>
+                                        <span class="timeline-period">{{ exp.period }}</span>
+                                    </div>
+                                    <div class="timeline-company">{{ exp.company }} · {{ exp.contract }}</div>
+                                    <div class="timeline-location">{{ exp.location }}</div>
+                                    <p class="timeline-description">{{ exp.description }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <h4 class="parcours-subtitle">Formation</h4>
+
+                    <div class="timeline timeline--compact">
+                        {% for edu in education %}
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-header">
+                                        <h5>{{ edu.degree }}</h5>
+                                    </div>
+                                    <div class="timeline-company">{{ edu.school }}</div>
+                                    <div class="timeline-location">
+                                        {{ edu.period }}{{ edu.mention ? ' · ' ~ edu.mention : '' }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+{% endif %}
