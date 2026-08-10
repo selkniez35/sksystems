@@ -1,0 +1,48 @@
+{% if recommendations is defined and recommendations|length > 0 %}
+    <section id="recommandations" class="py-5 py-lg-6 recommendations-section">
+        <div class="container">
+
+            <div class="text-center mb-5">
+                <span class="section-eyebrow">Ils me recommandent</span>
+                <h2 class="fw-bold">Recommandations</h2>
+            </div>
+
+        </div>
+
+        {% set loop_recommendations = recommendations|length > 1 ? recommendations|merge(recommendations) : recommendations %}
+        <div class="reco-marquee {{ recommendations|length > 1 ? '' : 'reco-marquee--static' }}">
+            <div class="reco-track">
+                {% for reco in loop_recommendations %}
+                    <div class="reco-card">
+
+                        <div class="reco-card-header">
+                            <span class="reco-platform-icon reco-platform-{{ reco.platform }}" title="{{ reco.platform == 'linkedin' ? 'LinkedIn' : 'LeHibou' }}">
+                                {% if reco.platform == 'linkedin' %}
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                                        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>
+                                    </svg>
+                                {% else %}
+                                    <img src="{{ asset('images/logos/lehibou-icon.png') }}" width="18" height="18" alt="LeHibou">
+                                {% endif %}
+                            </span>
+                            {% if reco.rating %}
+                                <span class="reco-stars" aria-label="Note : {{ reco.rating }} sur 5">
+                                    {% for i in 1..5 %}<span class="{{ i <= reco.rating ? 'filled' : '' }}">★</span>{% endfor %}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <p class="reco-text">« {{ reco.text }} »</p>
+
+                        <div class="reco-author">
+                            <strong>{{ reco.name }}</strong>
+                            <span>{{ reco.role }}</span>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+{% endif %}

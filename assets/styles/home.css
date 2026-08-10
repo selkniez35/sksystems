@@ -290,6 +290,334 @@ section {
     border-radius: 20px;
 }
 
+/* ---------- Projects ---------- */
+
+.projects-section {
+    background: var(--light);
+}
+
+.project-card {
+    height: 100%;
+    padding: 35px;
+    border-radius: var(--radius-lg);
+    background: white;
+    border: 1px solid rgba(15, 23, 42, .06);
+    box-shadow: var(--shadow-soft);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(15, 23, 42, .12);
+    border-color: rgba(37, 99, 235, .25);
+}
+
+.project-client {
+    display: inline-block;
+    font-size: .78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.project-card h4 {
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.project-card p {
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.project-tag {
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--dark);
+    background: var(--light);
+    border: 1px solid rgba(15, 23, 42, .08);
+    border-radius: 20px;
+    padding: 4px 12px;
+}
+
+.case-study {
+    margin-bottom: 64px;
+}
+
+.case-study:last-of-type {
+    margin-bottom: 0;
+}
+
+.case-study-visual {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-strong);
+    border: 1px solid rgba(15, 23, 42, .08);
+}
+
+.case-study-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.case-study h3 {
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.case-study p {
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+.project-link {
+    display: inline-block;
+    margin-top: 18px;
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.project-link:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Parcours ---------- */
+
+.parcours-section {
+    background: white;
+}
+
+.parcours-subtitle {
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--dark);
+}
+
+.timeline {
+    position: relative;
+    padding-left: 28px;
+    border-left: 2px solid rgba(37, 99, 235, .15);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 32px;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -34px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .15);
+}
+
+.timeline-item--current .timeline-dot {
+    background: var(--secondary);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, .2);
+}
+
+.timeline-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.timeline-header h5 {
+    font-weight: 700;
+    margin: 0;
+    color: var(--dark);
+}
+
+.timeline-period {
+    font-size: .82rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.timeline-company {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: .9rem;
+    margin-top: 2px;
+}
+
+.timeline-location {
+    font-size: .82rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.timeline-description {
+    font-size: .9rem;
+    color: #374151;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.timeline--compact .timeline-item {
+    padding-bottom: 24px;
+}
+
+/* ---------- Contact ---------- */
+
+.contact-section {
+    background: var(--light);
+}
+
+.contact-form label {
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--dark);
+    margin-bottom: 6px;
+}
+
+.contact-form .form-control {
+    border-radius: 10px;
+    border: 1px solid rgba(15, 23, 42, .12);
+    padding: 10px 14px;
+}
+
+.contact-form .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+}
+
+.contact-form .invalid-feedback,
+.contact-form .form-error {
+    color: #DC2626;
+    font-size: .82rem;
+}
+
+/* ---------- Recommendations ---------- */
+
+.recommendations-section {
+    background: var(--light);
+}
+
+.reco-marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.reco-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: reco-scroll 40s linear infinite;
+}
+
+.reco-marquee:hover .reco-track {
+    animation-play-state: paused;
+}
+
+.reco-marquee--static {
+    display: flex;
+    justify-content: center;
+}
+
+.reco-marquee--static .reco-track {
+    animation: none;
+    width: auto;
+}
+
+@keyframes reco-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+.reco-card {
+    flex: 0 0 340px;
+    background: white;
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(15, 23, 42, .06);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.reco-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reco-platform-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.reco-platform-linkedin {
+    color: #0A66C2;
+}
+
+.reco-stars {
+    color: #E2E8F0;
+    letter-spacing: 1px;
+}
+
+.reco-stars .filled {
+    color: #FBBF24;
+}
+
+.reco-text {
+    color: #1F2937;
+    font-size: .95rem;
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.reco-author {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(15, 23, 42, .06);
+    padding-top: 12px;
+}
+
+.reco-author strong {
+    color: var(--dark);
+    font-size: .95rem;
+}
+
+.reco-author span {
+    color: var(--text-muted);
+    font-size: .85rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reco-track {
+        animation: none;
+    }
+}
+
 /* ---------- Why section ---------- */
 
 .why-section {

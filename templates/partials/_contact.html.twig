@@ -1,0 +1,59 @@
+<section id="contact" class="py-5 py-lg-6 contact-section">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <span class="section-eyebrow">On en discute ?</span>
+            <h2 class="fw-bold">Contact</h2>
+            <p class="text-muted">
+                Décrivez votre projet, je vous réponds rapidement.
+            </p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                {% for message in app.flashes('contact_success') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {{ form_start(contactForm, {'attr': {'class': 'contact-form'}}) }}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            {{ form_label(contactForm.name) }}
+                            {{ form_widget(contactForm.name, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(contactForm.name) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_label(contactForm.email) }}
+                            {{ form_widget(contactForm.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(contactForm.email) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(contactForm.subject) }}
+                            {{ form_widget(contactForm.subject, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(contactForm.subject) }}
+                        </div>
+                        <div class="col-12">
+                            {{ form_label(contactForm.message) }}
+                            {{ form_widget(contactForm.message, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+                            {{ form_errors(contactForm.message) }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">
+                        Envoyer mon message
+                    </button>
+                {{ form_end(contactForm) }}
+
+                <p class="text-center text-muted mt-4 mb-0">
+                    Ou directement par email :
+                    <a href="mailto:samy.elkniez@sksystems.fr">samy.elkniez@sksystems.fr</a>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</section>
