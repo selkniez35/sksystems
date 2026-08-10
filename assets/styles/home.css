@@ -523,6 +523,7 @@ section {
 
 .reco-track {
     display: flex;
+    align-items: flex-start;
     gap: 24px;
     width: max-content;
     animation: reco-scroll 40s linear infinite;
