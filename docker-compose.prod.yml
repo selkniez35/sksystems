@@ -6,6 +6,14 @@ services:
     restart: unless-stopped
     env_file:
       - .env.local
+    environment:
+      # Force l'environnement de prod, indépendamment de ce que contient
+      # .env.local (qui ne doit porter que des secrets, pas ces réglages) :
+      # sans ça, un APP_ENV/APP_DEBUG résiduel dans .env.local écrase le
+      # ENV du Dockerfile au runtime et fait planter le site (DebugBundle
+      # absent car exclu par `composer install --no-dev`).
+      APP_ENV: prod
+      APP_DEBUG: "0"
     expose:
       - "10000"
     depends_on:
