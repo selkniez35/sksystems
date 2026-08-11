@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog - Conseils sites web & applications sur mesure | SK Systems{% endblock %}
+{% block meta_description %}Guides et conseils pour bien budgéter, cadrer et réussir votre projet de site web ou d'application métier sur mesure : prix, choix technique, freelance vs agence.{% endblock %}
+{% block og_title %}Blog SK Systems - Conseils sites web & applications sur mesure{% endblock %}
+
+{% block body %}
+
+    <section class="py-5 py-lg-6 blog-hero">
+        <div class="container text-center">
+            <span class="section-eyebrow">Blog</span>
+            <h1 class="fw-bold">Conseils pour votre projet web</h1>
+            <p class="lead text-muted mt-3">
+                Prix, choix technique, freelance ou agence : des articles pour cadrer
+                votre projet de site ou d'application sur mesure avant de vous lancer.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-5 py-lg-6 blog-index-section">
+        <div class="container">
+
+            <div class="row g-4">
+                {% for article in articles %}
+                    <div class="col-md-6 col-lg-4">
+                        <a href="{{ path('app_blog_show', { slug: article.slug }) }}" class="blog-card">
+                            <span class="blog-card-category">{{ article.category }}</span>
+                            <h2 class="h4">{{ article.title }}</h2>
+                            <p>{{ article.excerpt }}</p>
+                            <div class="blog-card-meta">
+                                <time datetime="{{ article.publishedAt|date('Y-m-d') }}">
+                                    {{ article.publishedAt|date('d/m/Y') }}
+                                </time>
+                                <span>·</span>
+                                <span>{{ article.readingTimeMinutes }} min de lecture</span>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

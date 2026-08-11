@@ -1,0 +1,125 @@
+/* ---------- Blog hero & listing ---------- */
+
+.blog-hero {
+    background: var(--dark);
+    background-image: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, .25), transparent 55%);
+}
+
+.blog-hero h1,
+.blog-hero .section-eyebrow {
+    color: white;
+}
+
+.blog-hero .lead {
+    color: rgba(255, 255, 255, .75) !important;
+}
+
+.blog-index-section {
+    background: var(--light);
+}
+
+.blog-card {
+    display: block;
+    height: 100%;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    background: white;
+    border: 1px solid rgba(15, 23, 42, .06);
+    box-shadow: var(--shadow-soft);
+    text-decoration: none;
+    color: inherit;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(15, 23, 42, .12);
+    border-color: rgba(37, 99, 235, .25);
+    color: inherit;
+}
+
+.blog-card-category {
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: .75rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.blog-card h2,
+.blog-card h3 {
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--dark);
+}
+
+.blog-card p {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.blog-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: .85rem;
+}
+
+/* ---------- Blog article ---------- */
+
+.blog-breadcrumb a {
+    color: var(--text-muted);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: .9rem;
+}
+
+.blog-breadcrumb a:hover {
+    color: var(--primary);
+}
+
+.blog-article-section h1 {
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+}
+
+.blog-content h2 {
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.blog-content h3 {
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: .75rem;
+    font-size: 1.2rem;
+}
+
+.blog-content p {
+    color: #374151;
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+}
+
+.blog-content ul {
+    margin-bottom: 1.25rem;
+    padding-left: 1.25rem;
+}
+
+.blog-content li {
+    color: #374151;
+    line-height: 1.75;
+    margin-bottom: .5rem;
+}
+
+.blog-article-cta {
+    padding: 48px;
+    border-radius: var(--radius-lg);
+    background: var(--light);
+    border: 1px solid rgba(15, 23, 42, .06);
+}

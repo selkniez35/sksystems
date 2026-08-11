@@ -14,16 +14,19 @@
 
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
                 <li class="nav-item">
-                    <a class="nav-link" href="#services">Services</a>
+                    <a class="nav-link" href="{{ path('app_home') }}#services">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#tarifs">Tarifs</a>
+                    <a class="nav-link" href="{{ path('app_home') }}#tarifs">Tarifs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pourquoi">Pourquoi nous</a>
+                    <a class="nav-link" href="{{ path('app_home') }}#pourquoi">Pourquoi nous</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_blog_index') }}">Blog</a>
                 </li>
                 <li class="nav-item ms-lg-3">
-                    <a class="btn btn-primary btn-sm px-3" href="#contact">Discutons-en</a>
+                    <a class="btn btn-primary btn-sm px-3" href="{{ path('app_home') }}#contact">Discutons-en</a>
                 </li>
             </ul>
 
