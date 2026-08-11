@@ -10,8 +10,50 @@
         </title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="SK Systems - Développeur Symfony freelance : sites web, applications métiers et MVP sur mesure.">
+        <meta name="description" content="{% block meta_description %}SK Systems - Développeur Symfony freelance : sites web, applications métiers et MVP sur mesure.{% endblock %}">
+        <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.pathInfo }}">
         <link rel="icon" href="{{ asset('images/logos/sk-favicon-clair.png') }}" type="image/png">
+
+        <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+        <meta property="og:site_name" content="SK Systems">
+        <meta property="og:locale" content="fr_FR">
+        <meta property="og:url" content="{{ app.request.schemeAndHttpHost ~ app.request.pathInfo }}">
+        <meta property="og:title" content="{% block og_title %}SK Systems - Développement web & solutions digitales{% endblock %}">
+        <meta property="og:description" content="{{ block('meta_description') }}">
+        <meta property="og:image" content="{% block og_image %}{{ absolute_url(asset('images/logos/sk-logo-sur-accent.png')) }}{% endblock %}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ block('og_title') }}">
+        <meta name="twitter:description" content="{{ block('meta_description') }}">
+        <meta name="twitter:image" content="{{ block('og_image') }}">
+
+        {% block structured_data %}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "SK Systems",
+            "image": "{{ absolute_url(asset('images/logos/sk-logo-sur-accent.png')) }}",
+            "url": "{{ app.request.schemeAndHttpHost }}/",
+            "email": "samy.elkniez@sksystems.fr",
+            "telephone": "+33755464376",
+            "priceRange": "300 EUR/jour",
+            "founder": {
+                "@type": "Person",
+                "name": "Samy EL KNIEZ"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "14 Square de Tanouarn",
+                "postalCode": "35700",
+                "addressLocality": "Rennes",
+                "addressCountry": "FR"
+            },
+            "areaServed": "France",
+            "description": "Développeur Symfony freelance : sites web, applications métiers et MVP sur mesure."
+        }
+        </script>
+        {% endblock %}
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
