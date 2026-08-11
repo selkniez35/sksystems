@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }} | SK Systems{% endblock %}
+{% block meta_description %}{{ article.metaDescription }}{% endblock %}
+{% block og_title %}{{ article.title }}{% endblock %}
+{% block og_type %}article{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ article.title|json_encode|raw }},
+    "description": {{ article.metaDescription|json_encode|raw }},
+    "datePublished": "{{ article.publishedAt|date('Y-m-d') }}",
+    "dateModified": "{{ article.publishedAt|date('Y-m-d') }}",
+    "url": "{{ url('app_blog_show', { slug: article.slug }) }}",
+    "image": "{{ absolute_url(asset('images/logos/sk-logo-sur-accent.png')) }}",
+    "author": {
+        "@type": "Person",
+        "name": "Samy EL KNIEZ"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "SK Systems",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ absolute_url(asset('images/logos/sk-logo-sur-accent.png')) }}"
+        }
+    }
+}
+</script>
+{% endblock %}
+
+{% block body %}
+
+    <section class="py-5 py-lg-6 blog-article-section">
+        <div class="container" style="max-width: 780px;">
+
+            <nav class="blog-breadcrumb mb-4">
+                <a href="{{ path('app_blog_index') }}">← Retour au blog</a>
+            </nav>
+
+            <span class="section-eyebrow">{{ article.category }}</span>
+            <h1 class="fw-bold">{{ article.title }}</h1>
+
+            <div class="blog-card-meta mb-5">
+                <time datetime="{{ article.publishedAt|date('Y-m-d') }}">
+                    {{ article.publishedAt|date('d/m/Y') }}
+                </time>
+                <span>·</span>
+                <span>{{ article.readingTimeMinutes }} min de lecture</span>
+                <span>·</span>
+                <span>Par Samy EL KNIEZ</span>
+            </div>
+
+            <div class="blog-content">
+                {% include article.contentTemplate %}
+            </div>
+
+            <div class="blog-article-cta text-center mt-5">
+                <h3 class="fw-bold">Un projet en tête ?</h3>
+                <p class="text-muted">
+                    Parlons de vos besoins et voyons comment SK Systems peut vous aider à le concrétiser.
+                </p>
+                <a href="{{ path('app_home') }}#contact" class="btn btn-primary btn-lg mt-2">
+                    Discuter de votre projet
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    {% if relatedArticles|length > 0 %}
+        <section class="py-5 py-lg-6 blog-index-section">
+            <div class="container">
+
+                <div class="text-center mb-4">
+                    <span class="section-eyebrow">À lire aussi</span>
+                    <h2 class="fw-bold">D'autres articles</h2>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    {% for related in relatedArticles %}
+                        <div class="col-md-6 col-lg-5">
+                            <a href="{{ path('app_blog_show', { slug: related.slug }) }}" class="blog-card">
+                                <span class="blog-card-category">{{ related.category }}</span>
+                                <h3 class="h5">{{ related.title }}</h3>
+                                <p>{{ related.excerpt }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </section>
+    {% endif %}
+
+{% endblock %}
