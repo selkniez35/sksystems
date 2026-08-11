@@ -19,5 +19,9 @@ return [
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
+    'app_legal_notice' => [[], ['_controller' => 'App\\Controller\\LegalController::mentionsLegales'], [], [['text', '/mentions-legales']], [], [], []],
+    'app_terms_of_sale' => [[], ['_controller' => 'App\\Controller\\LegalController::cgv'], [], [['text', '/cgv']], [], [], []],
     'App\Controller\HomeController::index' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
+    'App\Controller\LegalController::mentionsLegales' => [[], ['_controller' => 'App\\Controller\\LegalController::mentionsLegales'], [], [['text', '/mentions-legales']], [], [], []],
+    'App\Controller\LegalController::cgv' => [[], ['_controller' => 'App\\Controller\\LegalController::cgv'], [], [['text', '/cgv']], [], [], []],
 ];

@@ -9,3 +9,4 @@ c44510,127.0.0.1,GET,http://localhost:8000/,1783547435,,500,request,1
 5b81d6,127.0.0.1,GET,http://localhost:8000/,1783547462,,200,request,0
 c9804f,127.0.0.1,GET,http://localhost:8000/favicon.ico,1783551117,69b46f,404,request,1
 69b46f,127.0.0.1,GET,http://localhost:8000/favicon.ico,1783551117,,404,request,1
+abf705,127.0.0.1,GET,http://localhost:8000/,1786385270,,200,request,0
