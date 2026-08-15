@@ -532,6 +532,6 @@ class __TwigTemplate_3f0db51f39bdde012ec2d0de374dc5a1 extends Template
         {% endfor %}
     </table>
 {% endmacro %}
-", "@WebProfiler/Collector/events.html.twig", "/var/www/sk-systems/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
+", "@WebProfiler/Collector/events.html.twig", "/var/www/sksystems/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
     }
 }

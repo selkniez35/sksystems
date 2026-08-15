@@ -74,9 +74,7 @@ class __TwigTemplate_30f1a71fac03d20171334409b1531c16 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        // line 4
-        yield "    SK Systems - Développement web & solutions digitales
-";
+        yield "SK Systems - Développement web & solutions digitales";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -86,7 +84,7 @@ class __TwigTemplate_30f1a71fac03d20171334409b1531c16 extends Template
         yield from [];
     }
 
-    // line 7
+    // line 5
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -99,350 +97,274 @@ class __TwigTemplate_30f1a71fac03d20171334409b1531c16 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 8
+        // line 6
         yield "
-<section class=\"hero-section\">
-    <div class=\"container\">
-        <div class=\"row align-items-center min-vh-75\">
-
-            <div class=\"col-lg-7\">
-
-                <span class=\"badge bg-primary mb-3\">
-                    Développeur Symfony Freelance
-                </span>
-
-                <h1 class=\"display-3 fw-bold text-white\">
-                    Créons des solutions web
-                    <span class=\"text-primary\">performantes</span>
-                </h1>
-
-                <p class=\"lead text-light opacity-75 mt-4\">
-                    SK Systems vous accompagne dans la création de vos sites web,
-                    applications métiers et MVP sur mesure.
-                </p>
-
-                <div class=\"mt-4\">
-                    <a href=\"#services\" class=\"btn btn-primary btn-lg me-3\">
-                        Découvrir mes services
-                    </a>
-
-                    <a href=\"#mvp\" class=\"btn btn-outline-light btn-lg\">
-                        Voir les MVP
-                    </a>
-                </div>
-
-            </div>
-
-            <div class=\"col-lg-5 mt-5 mt-lg-0\">
-
-                <div class=\"hero-card shadow-lg\">
-
-                    <div class=\"code-window\">
-
-                        <div class=\"code-header\">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-
-                        <pre><span>class</span> SKSystems
-{
-
-    stack:
-    [
-        Symfony,
-        PHP,
-        JavaScript,
-        API
-    ]
-
-    objectif:
-    \"Créer des solutions fiables\"
-
-}</pre>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section id=\"services\" class=\"py-5\">
-
-    <div class=\"container\">
-
-        <div class=\"text-center mb-5\">
-
-            <h2 class=\"fw-bold\">
-                Mes services
-            </h2>
-
-            <p class=\"text-muted\">
-                Des solutions adaptées à vos objectifs.
-            </p>
-
-        </div>
-
-        <div class=\"row g-4\">
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100\">
-
-                    <div class=\"icon\">🌐</div>
-
-                    <h4>Sites web</h4>
-
-                    <p>
-                        Création de sites modernes, rapides et optimisés
-                        pour présenter votre activité.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100\">
-
-                    <div class=\"icon\">⚙️</div>
-
-                    <h4>Applications web</h4>
-
-                    <p>
-                        Développement d\x27applications métiers,
-                        plateformes et outils internes avec Symfony.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100\">
-
-                    <div class=\"icon\">🚀</div>
-
-                    <h4>MVP</h4>
-
-                    <p>
-                        Transformez votre idée en produit fonctionnel
-                        et validez rapidement votre concept.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<section class=\"py-5 bg-light\">
-
-    <div class=\"container text-center\">
-
-        <h2 class=\"fw-bold\">
-            Intervention freelance
-        </h2>
-
-        <p class=\"text-muted\">
-            Développement Symfony, PHP et applications web sur mission.
-        </p>
-
-        <h3 class=\"text-primary fw-bold\">
-            450 € HT / jour
-        </h3>
-
-        <a href=\"#\" class=\"btn btn-primary mt-3\">
-            Discuter de votre projet
-        </a>
-
-    </div>
-
-</section>
-
-<section id=\"mvp\" class=\"mvp-section py-5\">
-
-    <div class=\"container\">
-
-        <div class=\"text-center mb-5\">
-
-            <h2 class=\"fw-bold\">
-                Mes offres MVP
-            </h2>
-
-            <p class=\"text-muted\">
-                Lancez votre projet avec une première version fonctionnelle.
-            </p>
-
-        </div>
-
-        <div class=\"row g-4\">
-            <div class=\"col-md-4\">
-
-                <div class=\"price-card h-100\">
-
-                    <h4>Starter</h4>
-
-                    <h2>990 €</h2>
-
-                    <ul class=\"list-unstyled my-4\">
-                        <li class=\"mb-2\">✔ Site professionnel</li>
-                        <li class=\"mb-2\">✔ Design responsive</li>
-                        <li class=\"mb-2\">✔ Formulaire de contact</li>
-                        <li>✔ Mise en ligne</li>
-                    </ul>
-
-                    <a href=\"#\" class=\"btn btn-primary w-100 mt-auto\">
-                        Commander
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class=\"col-md-4\">
-
-                <div class=\"price-card featured h-100\">
-
-                    <span class=\"popular\">
-                        Populaire
+    <section class=\"hero-section\">
+        <div class=\"container\">
+            <div class=\"row align-items-center min-vh-75\">
+
+                <div class=\"col-lg-7\">
+
+                    <span class=\"hero-badge mb-3\">
+                        <span class=\"dot\"></span>
+                        Disponible pour de nouvelles missions
                     </span>
 
-                    <h4>Business</h4>
+                    <h1 class=\"display-3 fw-bold text-white mt-3\">
+                        Créons des solutions web
+                        <span class=\"text-primary\">performantes</span>
+                    </h1>
 
-                    <h2>2490 €</h2>
+                    <p class=\"lead text-light opacity-75 mt-4\">
+                        SK Systems accompagne les entreprises et entrepreneurs
+                        dans la création de sites web, applications métiers
+                        et MVP sur mesure avec Symfony, PHP et JavaScript.
+                    </p>
 
-                    <ul class=\"list-unstyled my-4\">
-                        <li class=\"mb-2\">✔ Application web</li>
-                        <li class=\"mb-2\">✔ Base de données</li>
-                        <li class=\"mb-2\">✔ Espace utilisateur</li>
-                        <li>✔ Paiement intégré</li>
-                    </ul>
+                    <div class=\"mt-4\">
+                        <a href=\"#services\" class=\"btn btn-primary btn-lg me-3\">
+                            Découvrir mes services
+                        </a>
+                        <a href=\"#tarifs\" class=\"btn btn-outline-light btn-lg\">
+                            Voir les tarifs
+                        </a>
+                    </div>
 
-                    <a href=\"#\" class=\"btn btn-primary w-100 mt-auto\">
-                        Commander
-                    </a>
+                    <div class=\"hero-stats\">
+                        <div>
+                            <div class=\"stat-value\">100%</div>
+                            <div class=\"stat-label\">Symfony &amp; PHP moderne</div>
+                        </div>
+                        <div>
+                            <div class=\"stat-value\">MVP</div>
+                            <div class=\"stat-label\">Du concept au produit</div>
+                        </div>
+                        <div>
+                            <div class=\"stat-value\">Rennes</div>
+                            <div class=\"stat-label\">Bretagne &amp; à distance partout en France</div>
+                        </div>
+                    </div>
 
                 </div>
 
+                <div class=\"col-lg-5 mt-5 mt-lg-0\">
+                    <div class=\"hero-card shadow-lg\">
+                        <div class=\"code-window\">
+
+                            <div class=\"code-header\">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <pre><span class=\"kw\">class</span> <span class=\"cls\">SKSystems</span>
+{
+    <span class=\"prop\">stack</span>: [
+        <span class=\"str\">\"Symfony\"</span>,
+        <span class=\"str\">\"PHP\"</span>,
+        <span class=\"str\">\"JavaScript\"</span>,
+        <span class=\"str\">\"API\"</span>
+    ],
+
+    <span class=\"prop\">objectif</span>:
+        <span class=\"str\">\"Créer des solutions fiables\"</span>
+}</pre>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id=\"services\" class=\"py-5 py-lg-6\">
+        <div class=\"container\">
+
+            <div class=\"text-center mb-5\">
+                <span class=\"section-eyebrow\">Ce que je propose</span>
+                <h2 class=\"fw-bold\">Mes services</h2>
+                <p class=\"text-muted\">Des solutions adaptées à vos objectifs.</p>
             </div>
 
-            <div class=\"col-md-4\">
+            <div class=\"row g-4\">
 
-                <div class=\"price-card h-100\">
+                <div class=\"col-md-4\">
+                    <div class=\"service-card\">
+                        <div class=\"icon\">🌐</div>
+                        <h4>Sites web</h4>
+                        <p>
+                            Création de sites modernes, rapides et optimisés
+                            pour présenter votre activité.
+                        </p>
+                    </div>
+                </div>
 
-                    <h4>Sur mesure</h4>
+                <div class=\"col-md-4\">
+                    <div class=\"service-card\">
+                        <div class=\"icon\">⚙️</div>
+                        <h4>Applications web</h4>
+                        <p>
+                            Développement d\x27applications métiers,
+                            plateformes et outils internes avec Symfony.
+                        </p>
+                    </div>
+                </div>
 
-                    <h2>Devis</h2>
-
-                    <ul class=\"list-unstyled my-4\">
-                        <li class=\"mb-2\">✔ Projet spécifique</li>
-                        <li class=\"mb-2\">✔ Architecture dédiée</li>
-                        <li>✔ Accompagnement complet</li>
-                    </ul>
-
-                    <a href=\"#\" class=\"btn btn-outline-primary w-100 mt-auto\">
-                        Contact
-                    </a>
-
+                <div class=\"col-md-4\">
+                    <div class=\"service-card\">
+                        <div class=\"icon\">🚀</div>
+                        <h4>MVP</h4>
+                        <p>
+                            Transformez votre idée en produit fonctionnel
+                            et validez rapidement votre concept.
+                        </p>
+                    </div>
                 </div>
 
             </div>
 
         </div>
+    </section>
 
-    </div>
+    ";
+        // line 135
+        yield from $this->load("partials/_projects.html.twig", 135)->unwrap()->yield($context);
+        // line 136
+        yield "
+    ";
+        // line 137
+        yield from $this->load("partials/_parcours.html.twig", 137)->unwrap()->yield($context);
+        // line 138
+        yield "
+    ";
+        // line 139
+        yield from $this->load("partials/_recommendations.html.twig", 139)->unwrap()->yield($context);
+        // line 140
+        yield "
+    <section id=\"pourquoi\" class=\"py-5 py-lg-6 why-section\">
+        <div class=\"container\">
 
-</section>
-
-<section class=\"py-5\">
-
-    <div class=\"container\">
-
-        <div class=\"text-center\">
-
-            <h2 class=\"fw-bold mb-3\">
-                Pourquoi SK Systems ?
-            </h2>
-
-            <p class=\"lead text-muted mb-5\">
-                Une approche basée sur la qualité du code, la performance et la simplicité.
-            </p>
-
-        </div>
-
-        <div class=\"row g-4\">
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100 text-center\">
-
-                    <div class=\"icon mb-3\">
-                        ⚡
-                    </div>
-
-                    <h4>Performance</h4>
-
-                    <p>
-                        Des applications rapides, optimisées et pensées pour évoluer.
-                    </p>
-
-                </div>
-
+            <div class=\"text-center mb-4\">
+                <span class=\"section-eyebrow\">Pourquoi SK Systems ?</span>
+                <h2 class=\"fw-bold\">Une approche exigeante</h2>
+                <p class=\"lead text-muted mt-3\">
+                    Une approche basée sur la qualité du code,
+                    la performance et la simplicité.
+                </p>
             </div>
 
-            <div class=\"col-md-4\">
+            <div class=\"row g-4 text-center justify-content-center\">
 
-                <div class=\"service-card h-100 text-center\">
-
-                    <div class=\"icon mb-3\">
-                        🛡️
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">🧩</div>
+                        <h5>Code propre</h5>
+                        <p>Un code lisible, testé et maintenable sur le long terme.</p>
                     </div>
-
-                    <h4>Fiabilité</h4>
-
-                    <p>
-                        Un code propre, maintenable et conforme aux bonnes pratiques Symfony.
-                    </p>
-
                 </div>
 
-            </div>
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100 text-center\">
-
-                    <div class=\"icon mb-3\">
-                        🤝
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">⚡</div>
+                        <h5>Performance</h5>
+                        <p>Des applications rapides, optimisées et sécurisées.</p>
                     </div>
+                </div>
 
-                    <h4>Accompagnement</h4>
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">💬</div>
+                        <h5>Communication directe</h5>
+                        <p>Un interlocuteur unique, disponible du début à la livraison.</p>
+                    </div>
+                </div>
 
-                    <p>
-                        Un interlocuteur unique pour vous accompagner de l\x27idée jusqu\x27à la mise en production.
-                    </p>
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">⏱️</div>
+                        <h5>Délais respectés</h5>
+                        <p>Un suivi rigoureux pour livrer dans les temps annoncés.</p>
+                    </div>
+                </div>
 
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">🤖</div>
+                        <h5>IA au quotidien</h5>
+                        <p>J\x27utilise l\x27IA pour accélérer certains développements — un assistant, jamais un remplaçant : conception, choix techniques et relecture restent humains.</p>
+                    </div>
                 </div>
 
             </div>
 
         </div>
+    </section>
 
-    </div>
+    <section id=\"tarifs\" class=\"py-5 py-lg-6 pricing-section\">
+        <div class=\"container\">
 
-</section>
+            <div class=\"text-center mb-5\">
+                <span class=\"section-eyebrow\">Tarification</span>
+                <h2 class=\"fw-bold\">Intervention freelance</h2>
+                <p class=\"text-muted\">
+                    Développement Symfony, PHP et applications web sur mission.
+                </p>
+            </div>
 
+            <div class=\"row g-4 justify-content-center\">
+
+                <div class=\"col-md-6 col-lg-5\">
+                    <div class=\"price-card featured\">
+                        <span class=\"popular\">Tarif unique</span>
+                        <div class=\"price-tag mt-3\">
+                            300€ <span>HT / jour</span>
+                        </div>
+                        <ul>
+                            <li>Développement Symfony &amp; PHP</li>
+                            <li>Intégration front-end soignée</li>
+                            <li>Suivi et communication directe</li>
+                            <li>Code testé et documenté</li>
+                        </ul>
+                        <a href=\"#contact\" class=\"btn btn-primary btn-lg w-100\">
+                            Discuter de votre projet
+                        </a>
+                    </div>
+                </div>
+
+                <div class=\"col-md-6 col-lg-5\">
+                    <div class=\"price-card\">
+                        <div class=\"price-tag mt-3\">
+                            Devis <span>sur mesure</span>
+                        </div>
+                        <ul>
+                            <li>Cadrage et chiffrage du projet</li>
+                            <li>Forfait global, pas de facturation au jour</li>
+                            <li>Accompagnement de bout en bout</li>
+                            <li>Idéal pour les projets d\x27envergure</li>
+                        </ul>
+                        <a href=\"#contact\" class=\"btn btn-outline-primary btn-lg w-100\">
+                            Demander un devis
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class=\"text-center mt-5\">
+                <span class=\"hero-badge badge-light\">
+                    Paiement par virement (Revolut) disponible
+                </span>
+            </div>
+
+        </div>
+    </section>
+
+    ";
+        // line 259
+        yield from $this->load("partials/_contact.html.twig", 259)->unwrap()->yield($context);
+        // line 260
+        yield "
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -474,363 +396,272 @@ class __TwigTemplate_30f1a71fac03d20171334409b1531c16 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  103 => 8,  90 => 7,  78 => 4,  65 => 3,  42 => 1,);
+        return array (  367 => 260,  365 => 259,  244 => 140,  242 => 139,  239 => 138,  237 => 137,  234 => 136,  232 => 135,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends \x27base.html.twig\x27 %}
 
-{% block title %}
-    SK Systems - Développement web & solutions digitales
-{% endblock %}
+{% block title %}SK Systems - Développement web & solutions digitales{% endblock %}
 
 {% block body %}
 
-<section class=\"hero-section\">
-    <div class=\"container\">
-        <div class=\"row align-items-center min-vh-75\">
-
-            <div class=\"col-lg-7\">
-
-                <span class=\"badge bg-primary mb-3\">
-                    Développeur Symfony Freelance
-                </span>
-
-                <h1 class=\"display-3 fw-bold text-white\">
-                    Créons des solutions web
-                    <span class=\"text-primary\">performantes</span>
-                </h1>
-
-                <p class=\"lead text-light opacity-75 mt-4\">
-                    SK Systems vous accompagne dans la création de vos sites web,
-                    applications métiers et MVP sur mesure.
-                </p>
-
-                <div class=\"mt-4\">
-                    <a href=\"#services\" class=\"btn btn-primary btn-lg me-3\">
-                        Découvrir mes services
-                    </a>
-
-                    <a href=\"#mvp\" class=\"btn btn-outline-light btn-lg\">
-                        Voir les MVP
-                    </a>
-                </div>
-
-            </div>
-
-            <div class=\"col-lg-5 mt-5 mt-lg-0\">
-
-                <div class=\"hero-card shadow-lg\">
-
-                    <div class=\"code-window\">
-
-                        <div class=\"code-header\">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-
-                        <pre><span>class</span> SKSystems
-{
-
-    stack:
-    [
-        Symfony,
-        PHP,
-        JavaScript,
-        API
-    ]
-
-    objectif:
-    \"Créer des solutions fiables\"
-
-}</pre>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section id=\"services\" class=\"py-5\">
-
-    <div class=\"container\">
-
-        <div class=\"text-center mb-5\">
-
-            <h2 class=\"fw-bold\">
-                Mes services
-            </h2>
-
-            <p class=\"text-muted\">
-                Des solutions adaptées à vos objectifs.
-            </p>
-
-        </div>
-
-        <div class=\"row g-4\">
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100\">
-
-                    <div class=\"icon\">🌐</div>
-
-                    <h4>Sites web</h4>
-
-                    <p>
-                        Création de sites modernes, rapides et optimisés
-                        pour présenter votre activité.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100\">
-
-                    <div class=\"icon\">⚙️</div>
-
-                    <h4>Applications web</h4>
-
-                    <p>
-                        Développement d\x27applications métiers,
-                        plateformes et outils internes avec Symfony.
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100\">
-
-                    <div class=\"icon\">🚀</div>
-
-                    <h4>MVP</h4>
-
-                    <p>
-                        Transformez votre idée en produit fonctionnel
-                        et validez rapidement votre concept.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<section class=\"py-5 bg-light\">
-
-    <div class=\"container text-center\">
-
-        <h2 class=\"fw-bold\">
-            Intervention freelance
-        </h2>
-
-        <p class=\"text-muted\">
-            Développement Symfony, PHP et applications web sur mission.
-        </p>
-
-        <h3 class=\"text-primary fw-bold\">
-            450 € HT / jour
-        </h3>
-
-        <a href=\"#\" class=\"btn btn-primary mt-3\">
-            Discuter de votre projet
-        </a>
-
-    </div>
-
-</section>
-
-<section id=\"mvp\" class=\"mvp-section py-5\">
-
-    <div class=\"container\">
-
-        <div class=\"text-center mb-5\">
-
-            <h2 class=\"fw-bold\">
-                Mes offres MVP
-            </h2>
-
-            <p class=\"text-muted\">
-                Lancez votre projet avec une première version fonctionnelle.
-            </p>
-
-        </div>
-
-        <div class=\"row g-4\">
-            <div class=\"col-md-4\">
-
-                <div class=\"price-card h-100\">
-
-                    <h4>Starter</h4>
-
-                    <h2>990 €</h2>
-
-                    <ul class=\"list-unstyled my-4\">
-                        <li class=\"mb-2\">✔ Site professionnel</li>
-                        <li class=\"mb-2\">✔ Design responsive</li>
-                        <li class=\"mb-2\">✔ Formulaire de contact</li>
-                        <li>✔ Mise en ligne</li>
-                    </ul>
-
-                    <a href=\"#\" class=\"btn btn-primary w-100 mt-auto\">
-                        Commander
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class=\"col-md-4\">
-
-                <div class=\"price-card featured h-100\">
-
-                    <span class=\"popular\">
-                        Populaire
+    <section class=\"hero-section\">
+        <div class=\"container\">
+            <div class=\"row align-items-center min-vh-75\">
+
+                <div class=\"col-lg-7\">
+
+                    <span class=\"hero-badge mb-3\">
+                        <span class=\"dot\"></span>
+                        Disponible pour de nouvelles missions
                     </span>
 
-                    <h4>Business</h4>
+                    <h1 class=\"display-3 fw-bold text-white mt-3\">
+                        Créons des solutions web
+                        <span class=\"text-primary\">performantes</span>
+                    </h1>
 
-                    <h2>2490 €</h2>
+                    <p class=\"lead text-light opacity-75 mt-4\">
+                        SK Systems accompagne les entreprises et entrepreneurs
+                        dans la création de sites web, applications métiers
+                        et MVP sur mesure avec Symfony, PHP et JavaScript.
+                    </p>
 
-                    <ul class=\"list-unstyled my-4\">
-                        <li class=\"mb-2\">✔ Application web</li>
-                        <li class=\"mb-2\">✔ Base de données</li>
-                        <li class=\"mb-2\">✔ Espace utilisateur</li>
-                        <li>✔ Paiement intégré</li>
-                    </ul>
+                    <div class=\"mt-4\">
+                        <a href=\"#services\" class=\"btn btn-primary btn-lg me-3\">
+                            Découvrir mes services
+                        </a>
+                        <a href=\"#tarifs\" class=\"btn btn-outline-light btn-lg\">
+                            Voir les tarifs
+                        </a>
+                    </div>
 
-                    <a href=\"#\" class=\"btn btn-primary w-100 mt-auto\">
-                        Commander
-                    </a>
+                    <div class=\"hero-stats\">
+                        <div>
+                            <div class=\"stat-value\">100%</div>
+                            <div class=\"stat-label\">Symfony &amp; PHP moderne</div>
+                        </div>
+                        <div>
+                            <div class=\"stat-value\">MVP</div>
+                            <div class=\"stat-label\">Du concept au produit</div>
+                        </div>
+                        <div>
+                            <div class=\"stat-value\">Rennes</div>
+                            <div class=\"stat-label\">Bretagne &amp; à distance partout en France</div>
+                        </div>
+                    </div>
 
                 </div>
 
+                <div class=\"col-lg-5 mt-5 mt-lg-0\">
+                    <div class=\"hero-card shadow-lg\">
+                        <div class=\"code-window\">
+
+                            <div class=\"code-header\">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <pre><span class=\"kw\">class</span> <span class=\"cls\">SKSystems</span>
+{
+    <span class=\"prop\">stack</span>: [
+        <span class=\"str\">\"Symfony\"</span>,
+        <span class=\"str\">\"PHP\"</span>,
+        <span class=\"str\">\"JavaScript\"</span>,
+        <span class=\"str\">\"API\"</span>
+    ],
+
+    <span class=\"prop\">objectif</span>:
+        <span class=\"str\">\"Créer des solutions fiables\"</span>
+}</pre>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id=\"services\" class=\"py-5 py-lg-6\">
+        <div class=\"container\">
+
+            <div class=\"text-center mb-5\">
+                <span class=\"section-eyebrow\">Ce que je propose</span>
+                <h2 class=\"fw-bold\">Mes services</h2>
+                <p class=\"text-muted\">Des solutions adaptées à vos objectifs.</p>
             </div>
 
-            <div class=\"col-md-4\">
+            <div class=\"row g-4\">
 
-                <div class=\"price-card h-100\">
+                <div class=\"col-md-4\">
+                    <div class=\"service-card\">
+                        <div class=\"icon\">🌐</div>
+                        <h4>Sites web</h4>
+                        <p>
+                            Création de sites modernes, rapides et optimisés
+                            pour présenter votre activité.
+                        </p>
+                    </div>
+                </div>
 
-                    <h4>Sur mesure</h4>
+                <div class=\"col-md-4\">
+                    <div class=\"service-card\">
+                        <div class=\"icon\">⚙️</div>
+                        <h4>Applications web</h4>
+                        <p>
+                            Développement d\x27applications métiers,
+                            plateformes et outils internes avec Symfony.
+                        </p>
+                    </div>
+                </div>
 
-                    <h2>Devis</h2>
-
-                    <ul class=\"list-unstyled my-4\">
-                        <li class=\"mb-2\">✔ Projet spécifique</li>
-                        <li class=\"mb-2\">✔ Architecture dédiée</li>
-                        <li>✔ Accompagnement complet</li>
-                    </ul>
-
-                    <a href=\"#\" class=\"btn btn-outline-primary w-100 mt-auto\">
-                        Contact
-                    </a>
-
+                <div class=\"col-md-4\">
+                    <div class=\"service-card\">
+                        <div class=\"icon\">🚀</div>
+                        <h4>MVP</h4>
+                        <p>
+                            Transformez votre idée en produit fonctionnel
+                            et validez rapidement votre concept.
+                        </p>
+                    </div>
                 </div>
 
             </div>
 
         </div>
+    </section>
 
-    </div>
+    {% include \x27partials/_projects.html.twig\x27 %}
 
-</section>
+    {% include \x27partials/_parcours.html.twig\x27 %}
 
-<section class=\"py-5\">
+    {% include \x27partials/_recommendations.html.twig\x27 %}
 
-    <div class=\"container\">
+    <section id=\"pourquoi\" class=\"py-5 py-lg-6 why-section\">
+        <div class=\"container\">
 
-        <div class=\"text-center\">
-
-            <h2 class=\"fw-bold mb-3\">
-                Pourquoi SK Systems ?
-            </h2>
-
-            <p class=\"lead text-muted mb-5\">
-                Une approche basée sur la qualité du code, la performance et la simplicité.
-            </p>
-
-        </div>
-
-        <div class=\"row g-4\">
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100 text-center\">
-
-                    <div class=\"icon mb-3\">
-                        ⚡
-                    </div>
-
-                    <h4>Performance</h4>
-
-                    <p>
-                        Des applications rapides, optimisées et pensées pour évoluer.
-                    </p>
-
-                </div>
-
+            <div class=\"text-center mb-4\">
+                <span class=\"section-eyebrow\">Pourquoi SK Systems ?</span>
+                <h2 class=\"fw-bold\">Une approche exigeante</h2>
+                <p class=\"lead text-muted mt-3\">
+                    Une approche basée sur la qualité du code,
+                    la performance et la simplicité.
+                </p>
             </div>
 
-            <div class=\"col-md-4\">
+            <div class=\"row g-4 text-center justify-content-center\">
 
-                <div class=\"service-card h-100 text-center\">
-
-                    <div class=\"icon mb-3\">
-                        🛡️
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">🧩</div>
+                        <h5>Code propre</h5>
+                        <p>Un code lisible, testé et maintenable sur le long terme.</p>
                     </div>
-
-                    <h4>Fiabilité</h4>
-
-                    <p>
-                        Un code propre, maintenable et conforme aux bonnes pratiques Symfony.
-                    </p>
-
                 </div>
 
-            </div>
-
-            <div class=\"col-md-4\">
-
-                <div class=\"service-card h-100 text-center\">
-
-                    <div class=\"icon mb-3\">
-                        🤝
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">⚡</div>
+                        <h5>Performance</h5>
+                        <p>Des applications rapides, optimisées et sécurisées.</p>
                     </div>
+                </div>
 
-                    <h4>Accompagnement</h4>
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">💬</div>
+                        <h5>Communication directe</h5>
+                        <p>Un interlocuteur unique, disponible du début à la livraison.</p>
+                    </div>
+                </div>
 
-                    <p>
-                        Un interlocuteur unique pour vous accompagner de l\x27idée jusqu\x27à la mise en production.
-                    </p>
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">⏱️</div>
+                        <h5>Délais respectés</h5>
+                        <p>Un suivi rigoureux pour livrer dans les temps annoncés.</p>
+                    </div>
+                </div>
 
+                <div class=\"col-6 col-lg-3\">
+                    <div class=\"feature-item\">
+                        <div class=\"icon\">🤖</div>
+                        <h5>IA au quotidien</h5>
+                        <p>J\x27utilise l\x27IA pour accélérer certains développements — un assistant, jamais un remplaçant : conception, choix techniques et relecture restent humains.</p>
+                    </div>
                 </div>
 
             </div>
 
         </div>
+    </section>
 
-    </div>
+    <section id=\"tarifs\" class=\"py-5 py-lg-6 pricing-section\">
+        <div class=\"container\">
 
-</section>
+            <div class=\"text-center mb-5\">
+                <span class=\"section-eyebrow\">Tarification</span>
+                <h2 class=\"fw-bold\">Intervention freelance</h2>
+                <p class=\"text-muted\">
+                    Développement Symfony, PHP et applications web sur mission.
+                </p>
+            </div>
+
+            <div class=\"row g-4 justify-content-center\">
+
+                <div class=\"col-md-6 col-lg-5\">
+                    <div class=\"price-card featured\">
+                        <span class=\"popular\">Tarif unique</span>
+                        <div class=\"price-tag mt-3\">
+                            300€ <span>HT / jour</span>
+                        </div>
+                        <ul>
+                            <li>Développement Symfony &amp; PHP</li>
+                            <li>Intégration front-end soignée</li>
+                            <li>Suivi et communication directe</li>
+                            <li>Code testé et documenté</li>
+                        </ul>
+                        <a href=\"#contact\" class=\"btn btn-primary btn-lg w-100\">
+                            Discuter de votre projet
+                        </a>
+                    </div>
+                </div>
+
+                <div class=\"col-md-6 col-lg-5\">
+                    <div class=\"price-card\">
+                        <div class=\"price-tag mt-3\">
+                            Devis <span>sur mesure</span>
+                        </div>
+                        <ul>
+                            <li>Cadrage et chiffrage du projet</li>
+                            <li>Forfait global, pas de facturation au jour</li>
+                            <li>Accompagnement de bout en bout</li>
+                            <li>Idéal pour les projets d\x27envergure</li>
+                        </ul>
+                        <a href=\"#contact\" class=\"btn btn-outline-primary btn-lg w-100\">
+                            Demander un devis
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class=\"text-center mt-5\">
+                <span class=\"hero-badge badge-light\">
+                    Paiement par virement (Revolut) disponible
+                </span>
+            </div>
+
+        </div>
+    </section>
+
+    {% include \x27partials/_contact.html.twig\x27 %}
 
 {% endblock %}
-
-", "home/index.html.twig", "/var/www/sk-systems/templates/home/index.html.twig");
+", "home/index.html.twig", "/var/www/sksystems/templates/home/index.html.twig");
     }
 }

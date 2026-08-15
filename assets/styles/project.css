@@ -1,0 +1,72 @@
+/* ---------- Projects feed & submission form ---------- */
+
+.project-hero {
+    background: var(--dark);
+    background-image: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, .25), transparent 55%);
+}
+
+.project-hero h1,
+.project-hero .section-eyebrow {
+    color: white;
+}
+
+.project-hero .lead {
+    color: rgba(255, 255, 255, .75) !important;
+}
+
+.project-hero a:not(.btn) {
+    color: white;
+    text-decoration: underline;
+}
+
+.project-index-section,
+.project-form-section {
+    background: var(--light);
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    background: white;
+    border: 1px solid rgba(15, 23, 42, .06);
+    box-shadow: var(--shadow-soft);
+}
+
+.project-card-company {
+    display: inline-block;
+    font-size: .8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--primary, #2563eb);
+    margin-bottom: 8px;
+}
+
+.project-card-description {
+    white-space: pre-line;
+    color: #475569;
+    flex-grow: 1;
+}
+
+.project-card-budget {
+    display: inline-block;
+    font-size: .85rem;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.project-card-meta {
+    margin-top: 16px;
+    font-size: .8rem;
+    color: #94a3b8;
+}
+
+/* Piège à robots : masqué visuellement, mais présent dans le DOM. */
+.field-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}

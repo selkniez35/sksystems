@@ -475,6 +475,6 @@ class __TwigTemplate_1f25b7559ba877e0013620b6f52ff73f extends Template
         </div>
     {% endfor %}
 {% endblock %}
-", "@Debug/Profiler/dump.html.twig", "/var/www/sk-systems/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
+", "@Debug/Profiler/dump.html.twig", "/var/www/sksystems/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
     }
 }

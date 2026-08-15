@@ -340,6 +340,6 @@ class __TwigTemplate_fee18827e06039286070c91b1dba5fde extends Template
         {% block body \x27\x27 %}
     </body>
 </html>
-", "@WebProfiler/Profiler/base.html.twig", "/var/www/sk-systems/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/base.html.twig");
+", "@WebProfiler/Profiler/base.html.twig", "/var/www/sksystems/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/base.html.twig");
     }
 }
