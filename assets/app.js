@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './styles/app.css';
 import './styles/home.css';
 import './styles/blog.css';
+import './styles/project.css';
 
 console.log('SK Systems loaded');
 /*

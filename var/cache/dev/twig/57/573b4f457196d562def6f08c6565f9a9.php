@@ -181,6 +181,6 @@ class __TwigTemplate_b7ca87d876fdd89fd7b53e9a9fafe137 extends Template
 
     {{ include(\x27@WebProfiler/Profiler/toolbar_item.html.twig\x27, {link: profiler_url, name: \x27time\x27, status: status_color}) }}
 {% endblock %}
-", "@WebProfiler/Collector/memory.html.twig", "/var/www/sk-systems/vendor/symfony/web-profiler-bundle/Resources/views/Collector/memory.html.twig");
+", "@WebProfiler/Collector/memory.html.twig", "/var/www/sksystems/vendor/symfony/web-profiler-bundle/Resources/views/Collector/memory.html.twig");
     }
 }

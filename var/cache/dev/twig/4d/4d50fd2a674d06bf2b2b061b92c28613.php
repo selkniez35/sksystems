@@ -159,6 +159,6 @@ class __TwigTemplate_80f266207dc44f27f51287b77e93025e extends Template
     {% if link|default(false) %}</a>{% endif %}
         <div class=\"sf-toolbar-info\" id=\"sf-toolbar-info-{{ name }}-{{ token }}\" role=\"dialog\" aria-roledescription=\"details\" aria-label=\"{{ accessible_label }}\" tabindex=\"-1\">{{ text|default(\x27\x27) }}</div>
 </div>
-", "@WebProfiler/Profiler/toolbar_item.html.twig", "/var/www/sk-systems/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar_item.html.twig");
+", "@WebProfiler/Profiler/toolbar_item.html.twig", "/var/www/sksystems/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar_item.html.twig");
     }
 }

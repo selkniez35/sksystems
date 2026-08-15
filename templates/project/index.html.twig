@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets proposés par nos clients | SK Systems{% endblock %}
+{% block meta_description %}Découvrez les projets proposés par des clients et prospects, ou proposez le vôtre : site web, application métier, MVP sur mesure.{% endblock %}
+{% block og_title %}Projets proposés | SK Systems{% endblock %}
+
+{% block body %}
+
+    <section class="py-5 py-lg-6 project-hero">
+        <div class="container text-center">
+            <span class="section-eyebrow">Projets</span>
+            <h1 class="fw-bold">Les projets proposés par nos clients</h1>
+            <p class="lead text-muted mt-3 mx-auto" style="max-width: 640px;">
+                Un besoin de site web ou d'application sur mesure ? Proposez votre projet,
+                il sera publié ici après validation.
+            </p>
+            <a href="{{ path('app_project_new') }}" class="btn btn-primary btn-lg mt-2">
+                Proposer mon projet
+            </a>
+        </div>
+    </section>
+
+    <section class="py-5 py-lg-6 project-index-section">
+        <div class="container">
+
+            {% for message in app.flashes('project_success') %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% if projects is empty %}
+                <p class="text-center text-muted">
+                    Aucun projet publié pour le moment. Soyez le premier à
+                    <a href="{{ path('app_project_new') }}">proposer le vôtre</a> !
+                </p>
+            {% else %}
+                <div class="row g-4">
+                    {% for project in projects %}
+                        <div class="col-md-6 col-lg-4">
+                            <article class="project-card">
+                                <span class="project-card-company">{{ project.companyName }}</span>
+                                <h2 class="h4">{{ project.title }}</h2>
+                                <p class="project-card-description">{{ project.description }}</p>
+                                {% if project.budget %}
+                                    <span class="project-card-budget">Budget : {{ project.budget }}</span>
+                                {% endif %}
+                                <div class="project-card-meta">
+                                    <time datetime="{{ project.publishedAt|date('Y-m-d') }}">
+                                        Publié le {{ project.publishedAt|date('d/m/Y') }}
+                                    </time>
+                                </div>
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+    </section>
+
+{% endblock %}

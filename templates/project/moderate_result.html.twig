@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modération du projet | SK Systems{% endblock %}
+
+{% block body %}
+
+    <section class="py-6 project-hero">
+        <div class="container text-center">
+            {% if outcome == 'approved' %}
+                <h1 class="fw-bold">Projet publié</h1>
+                <p class="lead text-muted mt-3">
+                    « {{ project.title }} » de {{ project.companyName }} est maintenant visible sur
+                    <a href="{{ path('app_project_index') }}">la page des projets</a>.
+                </p>
+            {% elseif outcome == 'rejected' %}
+                <h1 class="fw-bold">Projet rejeté</h1>
+                <p class="lead text-muted mt-3">
+                    « {{ project.title }} » de {{ project.companyName }} ne sera pas publié.
+                </p>
+            {% else %}
+                <h1 class="fw-bold">Déjà traité</h1>
+                <p class="lead text-muted mt-3">
+                    Ce projet a déjà été modéré (statut actuel : {{ project.status.value }}).
+                </p>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}
