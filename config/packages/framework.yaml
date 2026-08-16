@@ -1,5 +1,12 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
+    # Caddy (le reverse proxy prod) tourne sur le même réseau Docker que
+    # l'appli et transmet les headers X-Forwarded-*. Sans ça, Symfony ne
+    # détecte jamais le HTTPS d'origine : les redirections internes et les
+    # cookies générés pointent en http:// et perdent le flag Secure.
+    trusted_proxies: '10.0.0.0/8,172.16.0.0/12,192.168.0.0/16'
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port']
+
     secret: '%env(APP_SECRET)%'
 
     # Note that the session will be started ONLY if you read or write from it.
