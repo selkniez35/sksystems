@@ -24,6 +24,8 @@ security:
                 check_path: app_admin_login
                 default_target_path: app_admin_dashboard
                 enable_csrf: true
+                username_parameter: email
+                password_parameter: password
 
             logout:
                 path: app_admin_logout
