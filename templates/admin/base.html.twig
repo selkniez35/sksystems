@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Administration | SK Systems{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="{{ asset('images/logos/sk-favicon-clair.png') }}" type="image/png">
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('admin') }}
+    {% endblock %}
+</head>
+
+<body class="admin-body">
+
+    <nav class="navbar navbar-dark admin-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ app.user ? path('app_admin_dashboard') : path('app_admin_login') }}">
+                <img src="{{ asset('images/logos/sk-logo-sombre.png') }}" alt="SK Systems" height="32">
+            </a>
+            {% if app.user %}
+                <div class="d-flex align-items-center gap-3">
+                    <a class="admin-nav-link" href="{{ path('app_admin_dashboard') }}">Tableau de bord</a>
+                    <a class="admin-nav-link" href="{{ path('app_admin_statement_index') }}">Facturation</a>
+                    <a class="admin-nav-link" href="{{ path('app_admin_logout') }}">Déconnexion</a>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        {% for message in app.flashes('admin_success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+    </main>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('admin') }}
+    {% endblock %}
+</body>
+
+</html>

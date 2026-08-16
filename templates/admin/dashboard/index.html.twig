@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Tableau de bord | Administration SK Systems{% endblock %}
+
+{% block body %}
+
+    <h1 class="h3 mb-4">Mon chiffre d'affaires</h1>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card admin-card stat-tile">
+                <div class="card-body">
+                    <p class="stat-tile-label">Chiffre d'affaires (12 derniers mois)</p>
+                    <p class="stat-tile-value">{{ revenueLast12Months|number_format(0, ',', ' ') }} €</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card admin-card stat-tile">
+                <div class="card-body">
+                    <p class="stat-tile-label">Charges déduites (12 derniers mois)</p>
+                    <p class="stat-tile-value">{{ expensesLast12Months|number_format(0, ',', ' ') }} €</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card admin-card stat-tile">
+                <div class="card-body">
+                    <p class="stat-tile-label">Bénéfice net (12 derniers mois)</p>
+                    <p class="stat-tile-value">{{ netProfitLast12Months|number_format(0, ',', ' ') }} €</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card admin-card">
+        <div class="card-body">
+            <h2 class="h5">Évolution du chiffre d'affaires</h2>
+            <p class="text-muted small mb-4">
+                Du {{ periodFrom|date('d/m/Y') }} au {{ periodTo|date('d/m/Y') }}
+            </p>
+
+            <div
+                data-controller="revenue-chart"
+                data-revenue-chart-labels-value="{{ chartLabels|json_encode }}"
+                data-revenue-chart-revenue-value="{{ chartRevenue|json_encode }}"
+                data-revenue-chart-expenses-value="{{ chartExpenses|json_encode }}"
+                data-revenue-chart-net-profit-value="{{ chartNetProfit|json_encode }}"
+            >
+                <canvas data-revenue-chart-target="canvas" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ path('app_admin_statement_index') }}" class="btn btn-primary mt-4">Gérer mes saisies mensuelles</a>
+
+{% endblock %}

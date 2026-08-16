@@ -1,0 +1,51 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Facturation | Administration SK Systems{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">Facturation mensuelle</h1>
+        <a href="{{ path('app_admin_statement_new') }}" class="btn btn-primary">+ Nouvelle saisie</a>
+    </div>
+
+    <div class="card admin-card">
+        <div class="table-responsive">
+            <table class="table admin-table mb-0">
+                <thead>
+                    <tr>
+                        <th>Mois</th>
+                        <th>Facturation</th>
+                        <th>Charges</th>
+                        <th>Bénéfice net</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for statement in statements %}
+                        <tr>
+                            <td>{{ statement.month|date('m/Y') }}</td>
+                            <td>{{ statement.revenue|number_format(2, ',', ' ') }} €</td>
+                            <td>{{ statement.expenses|number_format(2, ',', ' ') }} €</td>
+                            <td class="{{ statement.netProfit >= 0 ? 'text-success' : 'text-danger' }}">
+                                {{ statement.netProfit|number_format(2, ',', ' ') }} €
+                            </td>
+                            <td class="text-end">
+                                <a href="{{ path('app_admin_statement_edit', {id: statement.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                                <form method="post" action="{{ path('app_admin_statement_delete', {id: statement.id}) }}" class="d-inline" data-turbo-confirm="Supprimer cette saisie ?">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete-statement-' ~ statement.id) }}">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">Aucune saisie pour le moment.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
