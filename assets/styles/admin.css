@@ -1,0 +1,51 @@
+.admin-body {
+    background: var(--light);
+    min-height: 100vh;
+}
+
+.admin-navbar {
+    background: var(--dark);
+    padding: .75rem 1.5rem;
+}
+
+.admin-nav-link {
+    color: #fff;
+    opacity: .85;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.admin-nav-link:hover {
+    opacity: 1;
+    color: #fff;
+}
+
+.admin-card {
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+}
+
+.stat-tile-label {
+    color: var(--text-muted);
+    font-size: .875rem;
+    margin-bottom: .25rem;
+}
+
+.stat-tile-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.admin-table th {
+    color: var(--text-muted);
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    border-bottom-width: 1px;
+}
+
+.admin-table td {
+    vertical-align: middle;
+}

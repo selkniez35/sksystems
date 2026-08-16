@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+    <div class="mb-3">
+        {{ form_label(form.month) }}
+        {{ form_widget(form.month, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.month) }}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.revenue) }}
+        {{ form_widget(form.revenue, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.revenue) }}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.expenses) }}
+        {{ form_widget(form.expenses, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.expenses) }}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.notes) }}
+        {{ form_widget(form.notes, {'attr': {'class': 'form-control', 'rows': 4}}) }}
+        {{ form_errors(form.notes) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a href="{{ path('app_admin_statement_index') }}" class="btn btn-outline-secondary">Annuler</a>
+{{ form_end(form) }}

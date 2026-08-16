@@ -1,0 +1,15 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Nouvelle saisie | Administration SK Systems{% endblock %}
+
+{% block body %}
+
+    <h1 class="h3 mb-4">Nouvelle saisie mensuelle</h1>
+
+    <div class="card admin-card">
+        <div class="card-body">
+            {% include 'admin/statement/_form.html.twig' %}
+        </div>
+    </div>
+
+{% endblock %}
