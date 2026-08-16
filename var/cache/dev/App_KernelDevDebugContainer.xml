@@ -394,6 +394,45 @@
       <tag name="container.error" message="Cannot autowire service &quot;App\Blog\Article&quot;: argument &quot;$slug&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
     </service>
     <service id="App\Blog\ArticleRepository" class="App\Blog\ArticleRepository" autowire="true" autoconfigure="true"/>
+    <service id="App\Command\CreateAdminUserCommand" class="App\Command\CreateAdminUserCommand" autowire="true" autoconfigure="true">
+      <tag name="console.command" command="app:admin:create-user" description="Crée ou met à jour le compte administrateur unique" help=""/>
+      <tag name="console.command"/>
+      <tag name="console.command.service_arguments"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="App\Repository\UserRepository"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <argument type="service" id="security.user_password_hasher"/>
+      <call method="setName">
+        <argument>app:admin:create-user</argument>
+      </call>
+      <call method="setDescription">
+        <argument>Crée ou met à jour le compte administrateur unique</argument>
+      </call>
+    </service>
+    <service id="App\Controller\Admin\DashboardController" class="App\Controller\Admin\DashboardController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Controller\Admin\DashboardController"/>
+      </call>
+    </service>
+    <service id="App\Controller\Admin\MonthlyStatementController" class="App\Controller\Admin\MonthlyStatementController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Controller\Admin\MonthlyStatementController"/>
+      </call>
+    </service>
+    <service id="App\Controller\Admin\SecurityController" class="App\Controller\Admin\SecurityController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="routing.controller"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.TJNRSaV.App\Controller\Admin\SecurityController"/>
+      </call>
+    </service>
     <service id="App\Controller\BlogController" class="App\Controller\BlogController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="routing.controller"/>
@@ -436,6 +475,10 @@
         <argument type="service" id=".service_locator.TJNRSaV.App\Controller\SitemapController"/>
       </call>
     </service>
+    <service id="App\Entity\MonthlyStatement" class="App\Entity\MonthlyStatement" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
     <service id="App\Entity\Project" class="App\Entity\Project" autowire="true" autoconfigure="true">
       <tag name="container.excluded" source="because it's a Doctrine entity"/>
       <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
@@ -443,13 +486,28 @@
     <service id="App\Entity\ProjectStatus" class="App\Entity\ProjectStatus" autowire="true" autoconfigure="true">
       <tag name="container.excluded" source="because it's an enum"/>
     </service>
+    <service id="App\Entity\User" class="App\Entity\User" autowire="true" autoconfigure="true">
+      <tag name="container.excluded" source="because it's a Doctrine entity"/>
+      <tag name="container.excluded" source="with #[Doctrine\ORM\Mapping\Entity] attribute"/>
+    </service>
     <service id="App\Form\ContactType" class="App\Form\ContactType" autowire="true" autoconfigure="true">
+      <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
+    </service>
+    <service id="App\Form\MonthlyStatementType" class="App\Form\MonthlyStatementType" autowire="true" autoconfigure="true">
       <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
     </service>
     <service id="App\Form\ProjectProposalType" class="App\Form\ProjectProposalType" autowire="true" autoconfigure="true">
       <tag name="form.type" csrf_token_id="%.form.type_extension.csrf.token_id%"/>
     </service>
+    <service id="App\Repository\MonthlyStatementRepository" class="App\Repository\MonthlyStatementRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\ProjectRepository" class="App\Repository\ProjectRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -496,6 +554,7 @@
         <argument key="debug.stopwatch" type="service" id="debug.stopwatch" on-invalid="ignore_uninitialized"/>
         <argument key="debug.event_dispatcher" type="service" id="debug.event_dispatcher" on-invalid="ignore_uninitialized"/>
         <argument key="debug.log_processor" type="service" id="debug.log_processor" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.rate_limiter" type="service" id="cache.rate_limiter" on-invalid="ignore_uninitialized"/>
         <argument key="session_listener" type="service" id="session_listener" on-invalid="ignore_uninitialized"/>
         <argument key="form.choice_list_factory.cached" type="service" id="form.choice_list_factory.cached" on-invalid="ignore_uninitialized"/>
         <argument key="cache.validator_expression_language" type="service" id="cache.validator_expression_language" on-invalid="ignore_uninitialized"/>
@@ -584,6 +643,9 @@
           <argument>reset</argument>
         </argument>
         <argument key="debug.log_processor" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="cache.rate_limiter" type="collection">
           <argument>reset</argument>
         </argument>
         <argument key="session_listener" type="collection">
@@ -763,7 +825,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" priority="-50">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.PT_6z2r"/>
+      <argument type="service" id=".service_locator.Pu2ljOZ"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" priority="-100">controller.argument_value_resolver</tag>
@@ -828,6 +890,7 @@
         <argument key="kernel.controller_arguments" type="collection">
           <argument key="Symfony\Component\HttpKernel\Attribute\Cache">true</argument>
           <argument key="Symfony\Component\HttpKernel\Attribute\IsSignatureValid">true</argument>
+          <argument key="Symfony\Component\HttpKernel\Attribute\RateLimit">true</argument>
           <argument key="Symfony\Component\Security\Http\Attribute\IsGranted">true</argument>
           <argument key="Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid">true</argument>
         </argument>
@@ -1057,6 +1120,7 @@
         <argument>cache.asset_mapper</argument>
         <argument>cache.messenger.restart_workers_signal</argument>
         <argument>cache.http_client.pool</argument>
+        <argument>cache.rate_limiter</argument>
         <argument>cache.validator_expression_language</argument>
         <argument>cache.doctrine.orm.default.result</argument>
         <argument>cache.doctrine.orm.default.query</argument>
@@ -1108,6 +1172,7 @@
         <argument>cache.asset_mapper</argument>
         <argument>cache.messenger.restart_workers_signal</argument>
         <argument>cache.http_client.pool</argument>
+        <argument>cache.rate_limiter</argument>
         <argument>cache.validator_expression_language</argument>
         <argument>cache.doctrine.orm.default.result</argument>
         <argument>cache.doctrine.orm.default.query</argument>
@@ -1136,6 +1201,7 @@
         <argument>cache.asset_mapper</argument>
         <argument>cache.messenger.restart_workers_signal</argument>
         <argument>cache.http_client.pool</argument>
+        <argument>cache.rate_limiter</argument>
         <argument>cache.validator_expression_language</argument>
         <argument>cache.doctrine.orm.default.result</argument>
         <argument>cache.doctrine.orm.default.query</argument>
@@ -1578,6 +1644,7 @@
       </argument>
       <argument type="collection">
         <argument>App\Form\ContactType</argument>
+        <argument>App\Form\MonthlyStatementType</argument>
         <argument>App\Form\ProjectProposalType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
@@ -1877,6 +1944,7 @@
         <argument key="cache.app" type="service" id="cache.app" on-invalid="ignore_uninitialized"/>
         <argument key="cache.messenger.restart_workers_signal" type="service" id="cache.messenger.restart_workers_signal" on-invalid="ignore_uninitialized"/>
         <argument key="cache.http_client.pool" type="service" id="cache.http_client.pool" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.rate_limiter" type="service" id="cache.rate_limiter" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
     <service id="cache.system_clearer" class="Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer" public="true">
@@ -1907,6 +1975,7 @@
         <argument key="cache.asset_mapper" type="service" id="cache.asset_mapper" on-invalid="ignore_uninitialized"/>
         <argument key="cache.messenger.restart_workers_signal" type="service" id="cache.messenger.restart_workers_signal" on-invalid="ignore_uninitialized"/>
         <argument key="cache.http_client.pool" type="service" id="cache.http_client.pool" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.rate_limiter" type="service" id="cache.rate_limiter" on-invalid="ignore_uninitialized"/>
         <argument key="cache.validator_expression_language" type="service" id="cache.validator_expression_language" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.default.result" type="service" id="cache.doctrine.orm.default.result" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.default.query" type="service" id="cache.doctrine.orm.default.query" on-invalid="ignore_uninitialized"/>
@@ -3411,6 +3480,14 @@
         <argument>-64</argument>
       </call>
       <call method="addListener">
+        <argument>kernel.controller_arguments.Symfony\Component\HttpKernel\Attribute\RateLimit</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="rate_limiter.attribute_listener"/>
+          <argument>onKernelControllerAttribute</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
         <argument>kernel.response</argument>
         <argument type="collection">
           <argument type="service_closure" id="web_link.add_link_header_listener"/>
@@ -3784,7 +3861,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.PT_6z2r"/>
+      <argument type="service" id=".service_locator.Pu2ljOZ"/>
     </service>
     <service id="debug.console.argument_resolver" class="Symfony\Component\Console\ArgumentResolver\TraceableArgumentResolver">
       <tag name="container.decorator" id="console.argument_resolver" inner="debug.console.argument_resolver.inner"/>
@@ -3863,6 +3940,9 @@
     <service id="routing.loader.attribute.services" class="Symfony\Component\Routing\Loader\AttributeServicesLoader">
       <tag name="routing.loader" priority="-10"/>
       <argument type="collection">
+        <argument>App\Controller\Admin\DashboardController</argument>
+        <argument>App\Controller\Admin\MonthlyStatementController</argument>
+        <argument>App\Controller\Admin\SecurityController</argument>
         <argument>App\Controller\BlogController</argument>
         <argument>App\Controller\HomeController</argument>
         <argument>App\Controller\LegalController</argument>
@@ -4264,6 +4344,21 @@
       <tag name="property_info.type_extractor" priority="-1001"/>
       <tag name="property_info.constructor_extractor" priority="-1001"/>
     </service>
+    <service id="cache.rate_limiter" class="Symfony\Component\Cache\Adapter\TraceableAdapter" public="true">
+      <tag name="cache.pool" pruneable="true"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument type="service" id="cache.rate_limiter.recorder_inner"/>
+      <argument type="service" id="profiler.is_disabled_state_checker" on-invalid="ignore"/>
+    </service>
+    <service id="limiter" class="Symfony\Component\RateLimiter\RateLimiterFactory" abstract="true">
+      <argument type="abstract">config</argument>
+      <argument type="abstract">storage</argument>
+      <argument>null</argument>
+    </service>
+    <service id="rate_limiter.attribute_listener" class="Symfony\Component\HttpKernel\EventListener\RateLimitAttributeListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id=".service_locator.dpiLQ5O"/>
+    </service>
     <service id="web_link.http_header_serializer" class="Symfony\Component\WebLink\HttpHeaderSerializer"/>
     <service id="web_link.http_header_parser" class="Symfony\Component\WebLink\HttpHeaderParser"/>
     <service id="web_link.add_link_header_listener" class="Symfony\Component\WebLink\EventListener\AddLinkHeaderListener">
@@ -4412,7 +4507,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.bS2e.mS"/>
+      <argument type="service" id=".service_locator.6RSaJ4N"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4522,6 +4617,7 @@
       <argument>%form.type_extension.csrf.field_attr%</argument>
       <argument type="collection">
         <argument key="App\Form\ContactType">submit</argument>
+        <argument key="App\Form\MonthlyStatementType">submit</argument>
         <argument key="App\Form\ProjectProposalType">submit</argument>
       </argument>
     </service>
@@ -5454,6 +5550,10 @@
         <argument type="service" id="cache.http_client.pool"/>
       </call>
       <call method="addInstance">
+        <argument>cache.rate_limiter</argument>
+        <argument type="service" id="cache.rate_limiter"/>
+      </call>
+      <call method="addInstance">
         <argument>cache.validator_expression_language</argument>
         <argument type="service" id="cache.validator_expression_language"/>
       </call>
@@ -5797,7 +5897,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.jh4r_oM"/>
+      <argument type="service" id=".service_locator.2gEb1Jf"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -6947,7 +7047,7 @@
       <argument type="service" id=".service_locator.5ltxHEW"/>
       <argument type="collection">
         <argument key="dev">null</argument>
-        <argument key="main">null</argument>
+        <argument key="main" type="service" id=".service_locator.567piEK"/>
       </argument>
     </service>
     <service id="security.user_value_resolver" class="Symfony\Component\Security\Http\Controller\UserValueResolver">
@@ -7044,6 +7144,14 @@
       <argument type="service" id="request_stack" on-invalid="null"/>
       <argument type="service" id="router.default" on-invalid="null"/>
       <argument type="service" id="security.token_storage" on-invalid="null"/>
+      <call method="registerListener">
+        <argument>main</argument>
+        <argument>app_admin_logout</argument>
+        <argument>logout</argument>
+        <argument>_csrf_token</argument>
+        <argument>null</argument>
+        <argument>null</argument>
+      </call>
     </service>
     <service id="security.route_loader.logout" class="Symfony\Bundle\SecurityBundle\Routing\LogoutRouteLoader">
       <tag name="routing.route_loader"/>
@@ -7152,12 +7260,27 @@
         </service>
       </argument>
     </service>
-    <service id="security.access_map" class="Symfony\Component\Security\Http\AccessMap"/>
+    <service id="security.access_map" class="Symfony\Component\Security\Http\AccessMap">
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.F1Z5kfg"/>
+        <argument type="collection">
+          <argument>PUBLIC_ACCESS</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.SVK5D2B"/>
+        <argument type="collection">
+          <argument>ROLE_ADMIN</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+    </service>
     <service id="security.context_listener" class="Symfony\Component\Security\Http\Firewall\ContextListener">
       <tag name="monolog.logger" channel="security"/>
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
-        <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+        <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
       </argument>
       <argument type="abstract">Provider Key</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -7282,7 +7405,7 @@
     </service>
     <service id="security.listener.user_provider" class="Symfony\Component\Security\Http\EventListener\UserProviderListener">
       <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\CheckPassportEvent" priority="1024" method="checkPassport"/>
-      <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+      <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
     </service>
     <service id="security.listener.user_provider.abstract" class="Symfony\Component\Security\Http\EventListener\UserProviderListener" abstract="true">
       <argument type="abstract">user provider</argument>
@@ -7510,7 +7633,9 @@
       <argument type="service" id=".service_locator.Bz.C4As"/>
       <argument type="service" id=".service_locator.GW5y7PS"/>
       <argument type="collection">
-        <argument key="main" type="collection"/>
+        <argument key="main" type="collection">
+          <argument type="service" id="debug.security.authenticator.form_login.main"/>
+        </argument>
       </argument>
       <argument>false</argument>
       <call method="setName">
@@ -7520,8 +7645,11 @@
         <argument>Display information about your security firewall(s)</argument>
       </call>
     </service>
-    <service id="security.user.provider.concrete.users_in_memory" class="Symfony\Component\Security\Core\User\InMemoryUserProvider">
-      <argument type="collection"/>
+    <service id="security.user.provider.concrete.app_user_provider" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider">
+      <argument type="service" id="doctrine"/>
+      <argument>App\Entity\User</argument>
+      <argument>email</argument>
+      <argument>null</argument>
     </service>
     <service id="security.firewall.map.config.dev" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
       <argument>dev</argument>
@@ -7558,18 +7686,30 @@
       <argument>null</argument>
       <argument>true</argument>
       <argument>false</argument>
-      <argument>security.user.provider.concrete.users_in_memory</argument>
+      <argument>security.user.provider.concrete.app_user_provider</argument>
       <argument>main</argument>
+      <argument>security.authenticator.form_login.main</argument>
       <argument>null</argument>
       <argument>null</argument>
+      <argument type="collection">
+        <argument>login_throttling</argument>
+        <argument>form_login</argument>
+      </argument>
       <argument>null</argument>
-      <argument type="collection"/>
-      <argument>null</argument>
-      <argument>null</argument>
+      <argument type="collection">
+        <argument key="path">app_admin_logout</argument>
+        <argument key="target">app_admin_login</argument>
+        <argument key="enable_csrf">null</argument>
+        <argument key="csrf_token_id">logout</argument>
+        <argument key="csrf_parameter">_csrf_token</argument>
+        <argument key="invalidate_session">true</argument>
+        <argument key="clear_site_data" type="collection"/>
+        <argument key="delete_cookies" type="collection"/>
+      </argument>
     </service>
     <service id="security.listener.main.user_provider" class="Symfony\Component\Security\Http\EventListener\UserProviderListener">
       <tag name="kernel.event_listener" dispatcher="debug.security.event_dispatcher.main" event="Symfony\Component\Security\Http\Event\CheckPassportEvent" priority="2048" method="checkPassport"/>
-      <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+      <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
     </service>
     <service id="security.user_checker.chain.main" class="Symfony\Component\Security\Core\User\ChainUserChecker">
       <argument type="tagged_iterator" tag="security.user_checker.main"/>
@@ -7579,7 +7719,7 @@
       <tag name="container.hot_path"/>
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
-        <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+        <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
       </argument>
       <argument>main</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -7594,9 +7734,117 @@
       <tag name="kernel.event_subscriber" dispatcher="debug.security.event_dispatcher.main"/>
       <argument type="service" id="security.authentication.session_strategy"/>
     </service>
+    <service id="security.logout_listener.main" class="Symfony\Component\Security\Http\Firewall\LogoutListener">
+      <argument type="service" id="security.token_storage"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument type="service" id="debug.security.event_dispatcher.main"/>
+      <argument type="collection">
+        <argument key="csrf_parameter">_csrf_token</argument>
+        <argument key="csrf_token_id">logout</argument>
+        <argument key="logout_path">app_admin_logout</argument>
+      </argument>
+    </service>
+    <service id="security.logout.listener.default.main" class="Symfony\Component\Security\Http\EventListener\DefaultLogoutListener">
+      <tag name="kernel.event_subscriber" dispatcher="debug.security.event_dispatcher.main"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument>app_admin_login</argument>
+    </service>
+    <service id="security.logout.listener.session.main" class="Symfony\Component\Security\Http\EventListener\SessionLogoutListener">
+      <tag name="kernel.event_subscriber" dispatcher="debug.security.event_dispatcher.main"/>
+    </service>
+    <service id="limiter._login_local_main" class="Symfony\Component\RateLimiter\RateLimiterFactory">
+      <argument type="collection">
+        <argument key="policy">fixed_window</argument>
+        <argument key="limit">5</argument>
+        <argument key="interval">1 minute</argument>
+        <argument key="id">_login_local_main</argument>
+      </argument>
+      <argument type="service" id="limiter.storage._login_local_main"/>
+      <argument>null</argument>
+    </service>
+    <service id="limiter.storage._login_local_main" class="Symfony\Component\RateLimiter\Storage\CacheStorage">
+      <argument type="service" id="cache.rate_limiter"/>
+    </service>
+    <service id="limiter._login_global_main" class="Symfony\Component\RateLimiter\RateLimiterFactory">
+      <argument type="collection">
+        <argument key="policy">fixed_window</argument>
+        <argument key="limit">25</argument>
+        <argument key="interval">1 minute</argument>
+        <argument key="id">_login_global_main</argument>
+      </argument>
+      <argument type="service" id="limiter.storage._login_global_main"/>
+      <argument>null</argument>
+    </service>
+    <service id="limiter.storage._login_global_main" class="Symfony\Component\RateLimiter\Storage\CacheStorage">
+      <argument type="service" id="cache.rate_limiter"/>
+    </service>
+    <service id="security.login_throttling.main.limiter" class="Symfony\Component\Security\Http\RateLimiter\DefaultLoginRateLimiter">
+      <argument type="service" id="limiter._login_global_main"/>
+      <argument type="service" id="limiter._login_local_main"/>
+      <argument>%container.build_hash%</argument>
+    </service>
+    <service id="security.listener.login_throttling.main" class="Symfony\Component\Security\Http\EventListener\LoginThrottlingListener">
+      <tag name="kernel.event_subscriber" dispatcher="debug.security.event_dispatcher.main"/>
+      <argument type="service" id="request_stack"/>
+      <argument type="service" id="security.login_throttling.main.limiter"/>
+    </service>
+    <service id="security.authenticator.form_login.main" class="Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator">
+      <argument type="service" id="security.http_utils"/>
+      <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
+      <argument type="service" id="security.authentication.success_handler.main.form_login"/>
+      <argument type="service" id="security.authentication.failure_handler.main.form_login"/>
+      <argument type="collection">
+        <argument key="login_path">app_admin_login</argument>
+        <argument key="check_path">app_admin_login</argument>
+        <argument key="enable_csrf">true</argument>
+        <argument key="use_forward">false</argument>
+        <argument key="username_parameter">_username</argument>
+        <argument key="password_parameter">_password</argument>
+        <argument key="csrf_parameter">_csrf_token</argument>
+        <argument key="csrf_token_id">authenticate</argument>
+        <argument key="post_only">true</argument>
+        <argument key="form_only">false</argument>
+      </argument>
+    </service>
+    <service id="security.authentication.success_handler.main.form_login" class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler">
+      <argument type="service" id="security.http_utils"/>
+      <argument type="collection"/>
+      <argument type="service" id="monolog.logger" on-invalid="null"/>
+      <call method="setOptions">
+        <argument type="collection">
+          <argument key="login_path">app_admin_login</argument>
+          <argument key="default_target_path">app_admin_dashboard</argument>
+          <argument key="always_use_default_target_path">false</argument>
+          <argument key="target_path_parameter">_target_path</argument>
+          <argument key="use_referer">false</argument>
+        </argument>
+      </call>
+      <call method="setFirewallName">
+        <argument>main</argument>
+      </call>
+    </service>
+    <service id="security.authentication.failure_handler.main.form_login" class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler">
+      <argument type="service" id="http_kernel"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument type="collection"/>
+      <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+      <call method="setOptions">
+        <argument type="collection">
+          <argument key="login_path">app_admin_login</argument>
+          <argument key="failure_path">null</argument>
+          <argument key="failure_forward">false</argument>
+          <argument key="failure_path_parameter">_failure_path</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="debug.security.authenticator.form_login.main" class="Symfony\Component\Security\Http\Authenticator\Debug\TraceableAuthenticator">
+      <argument type="service" id="security.authenticator.form_login.main"/>
+    </service>
     <service id="security.authenticator.manager.main" class="Symfony\Component\Security\Http\Authentication\AuthenticatorManager">
       <tag name="monolog.logger" channel="security"/>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument type="service" id="debug.security.authenticator.form_login.main"/>
+      </argument>
       <argument type="service" id="security.token_storage"/>
       <argument type="service" id="debug.security.event_dispatcher.main"/>
       <argument>main</argument>
@@ -7618,11 +7866,17 @@
       <argument type="service" id="security.authentication.trust_resolver"/>
       <argument type="service" id="security.http_utils"/>
       <argument>main</argument>
-      <argument>null</argument>
+      <argument type="service" id="security.authenticator.form_login.main"/>
       <argument>null</argument>
       <argument>null</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
       <argument>false</argument>
+    </service>
+    <service id=".service_locator.567piEK" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="security.authenticator.form_login.main" type="service_closure" id="security.authenticator.form_login.main"/>
+      </argument>
     </service>
     <service id="security.firewall.map.context.main" class="Symfony\Bundle\SecurityBundle\Security\LazyFirewallContext">
       <argument type="iterator">
@@ -7632,7 +7886,7 @@
         <argument type="service" id="security.access_listener"/>
       </argument>
       <argument type="service" id="security.exception_listener.main"/>
-      <argument>null</argument>
+      <argument type="service" id="security.logout_listener.main"/>
       <argument type="service" id="security.firewall.map.config.main"/>
       <argument type="service" id="security.untracked_token_storage"/>
     </service>
@@ -7648,6 +7902,22 @@
       <argument type="collection">
         <argument key="dev" type="service_closure" id="security.firewall.map.config.dev"/>
         <argument key="main" type="service_closure" id="security.firewall.map.config.main"/>
+      </argument>
+    </service>
+    <service id=".security.request_matcher.mAE4hmT" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/admin/login</argument>
+    </service>
+    <service id=".security.request_matcher.F1Z5kfg" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.mAE4hmT"/>
+      </argument>
+    </service>
+    <service id=".security.request_matcher.pqyCXG8" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/admin</argument>
+    </service>
+    <service id=".security.request_matcher.SVK5D2B" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.pqyCXG8"/>
       </argument>
     </service>
     <service id="security.command.user_password_hash" class="Symfony\Component\PasswordHasher\Command\UserPasswordHashCommand">
@@ -8001,6 +8271,21 @@
         <argument key="_default" type="service_closure" id="webpack_encore.entrypoint_lookup[_default]"/>
       </argument>
     </service>
+    <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Command\CreateAdminUserCommand" class="App\Command\CreateAdminUserCommand" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Command\CreateAdminUserCommand.0.App\Command\CreateAdminUserCommand" class="App\Command\CreateAdminUserCommand" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Command\CreateAdminUserCommand" class="App\Command\CreateAdminUserCommand" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\DashboardController" class="App\Controller\Admin\DashboardController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\DashboardController" class="App\Controller\Admin\DashboardController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\Admin\DashboardController.0.App\Controller\Admin\DashboardController" class="App\Controller\Admin\DashboardController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Admin\DashboardController" class="App\Controller\Admin\DashboardController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\MonthlyStatementController" class="App\Controller\Admin\MonthlyStatementController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\MonthlyStatementController" class="App\Controller\Admin\MonthlyStatementController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\Admin\MonthlyStatementController.0.App\Controller\Admin\MonthlyStatementController" class="App\Controller\Admin\MonthlyStatementController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Admin\MonthlyStatementController" class="App\Controller\Admin\MonthlyStatementController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\SecurityController" class="App\Controller\Admin\SecurityController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\SecurityController" class="App\Controller\Admin\SecurityController" autowire="true" abstract="true"/>
+    <service id=".instanceof.App\Controller\Admin\SecurityController.0.App\Controller\Admin\SecurityController" class="App\Controller\Admin\SecurityController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Admin\SecurityController" class="App\Controller\Admin\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\BlogController" class="App\Controller\BlogController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\BlogController" class="App\Controller\BlogController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\BlogController.0.App\Controller\BlogController" class="App\Controller\BlogController" autowire="true" abstract="true"/>
@@ -8021,16 +8306,26 @@
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SitemapController" class="App\Controller\SitemapController" autowire="true" abstract="true"/>
     <service id=".instanceof.App\Controller\SitemapController.0.App\Controller\SitemapController" class="App\Controller\SitemapController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SitemapController" class="App\Controller\SitemapController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Entity\MonthlyStatement.0.App\Entity\MonthlyStatement" class="App\Entity\MonthlyStatement" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Entity\MonthlyStatement" class="App\Entity\MonthlyStatement" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.App\Entity\Project.0.App\Entity\Project" class="App\Entity\Project" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Entity\Project" class="App\Entity\Project" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.UnitEnum.0.App\Entity\ProjectStatus" class="App\Entity\ProjectStatus" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Entity\ProjectStatus" class="App\Entity\ProjectStatus" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Entity\User.0.App\Entity\User" class="App\Entity\User" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Entity\User" class="App\Entity\User" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ContactType" class="App\Form\ContactType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ContactType" class="App\Form\ContactType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\MonthlyStatementType" class="App\Form\MonthlyStatementType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\MonthlyStatementType" class="App\Form\MonthlyStatementType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ProjectProposalType" class="App\Form\ProjectProposalType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ProjectProposalType" class="App\Form\ProjectProposalType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\MonthlyStatementRepository" class="App\Repository\MonthlyStatementRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\MonthlyStatementRepository" class="App\Repository\MonthlyStatementRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ProjectRepository" class="App\Repository\ProjectRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ProjectRepository" class="App\Repository\ProjectRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.ryAvHi4" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8078,6 +8373,46 @@
         <argument>Symfony\Component\Security\Http\Event\LoginSuccessEvent</argument>
         <argument type="collection">
           <argument type="service_closure" id="security.listener.session.main"/>
+          <argument>onSuccessfulLogin</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Security\Http\Event\LogoutEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="security.logout.listener.default.main"/>
+          <argument>onLogout</argument>
+        </argument>
+        <argument>64</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Security\Http\Event\LogoutEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="security.logout.listener.session.main"/>
+          <argument>onLogout</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Security\Http\Event\CheckPassportEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="security.listener.login_throttling.main"/>
+          <argument>checkPassport</argument>
+        </argument>
+        <argument>2080</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Security\Http\Event\LoginFailureEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="security.listener.login_throttling.main"/>
+          <argument>onFailedLogin</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Security\Http\Event\LoginSuccessEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="security.listener.login_throttling.main"/>
           <argument>onSuccessfulLogin</argument>
         </argument>
         <argument>0</argument>
@@ -8589,6 +8924,67 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.1vYpZ1B" method="withContext"/>
     </service>
+    <service id=".service_locator.6MPLMZ9" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="statements" type="service_closure" id="App\Repository\MonthlyStatementRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.6MPLMZ9.App\Controller\Admin\DashboardController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\DashboardController::index()"/>
+      <argument>App\Controller\Admin\DashboardController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.6MPLMZ9" method="withContext"/>
+    </service>
+    <service id=".service_locator.6MPLMZ9.App\Controller\Admin\MonthlyStatementController::index()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\MonthlyStatementController::index()"/>
+      <argument>App\Controller\Admin\MonthlyStatementController::index()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.6MPLMZ9" method="withContext"/>
+    </service>
+    <service id=".service_locator.3BoFVFw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.3BoFVFw.App\Controller\Admin\MonthlyStatementController::new()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\MonthlyStatementController::new()"/>
+      <argument>App\Controller\Admin\MonthlyStatementController::new()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.3BoFVFw" method="withContext"/>
+    </service>
+    <service id=".service_locator.I9P0la6" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="statement" type="service_closure" id=".errored..service_locator.I9P0la6.App\Entity\MonthlyStatement"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.I9P0la6.App\Controller\Admin\MonthlyStatementController::edit()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\MonthlyStatementController::edit()"/>
+      <argument>App\Controller\Admin\MonthlyStatementController::edit()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.I9P0la6" method="withContext"/>
+    </service>
+    <service id=".service_locator.I9P0la6.App\Controller\Admin\MonthlyStatementController::delete()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\MonthlyStatementController::delete()"/>
+      <argument>App\Controller\Admin\MonthlyStatementController::delete()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.I9P0la6" method="withContext"/>
+    </service>
+    <service id=".service_locator.0MQaTBY" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
+      </argument>
+    </service>
+    <service id=".service_locator.0MQaTBY.App\Controller\Admin\SecurityController::login()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\SecurityController::login()"/>
+      <argument>App\Controller\Admin\SecurityController::login()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.0MQaTBY" method="withContext"/>
+    </service>
     <service id=".service_locator.ya7DQk8" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8645,13 +9041,19 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.es0Ly41" method="withContext"/>
     </service>
-    <service id=".service_locator.PT_6z2r" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Pu2ljOZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.1vYpZ1B.kernel::registerContainerConfiguration()"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.1vYpZ1B.kernel::registerContainerConfiguration()"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.1vYpZ1B.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.1vYpZ1B.kernel::loadRoutes()"/>
+        <argument key="App\Controller\Admin\DashboardController::index" type="service_closure" id=".service_locator.6MPLMZ9.App\Controller\Admin\DashboardController::index()"/>
+        <argument key="App\Controller\Admin\MonthlyStatementController::index" type="service_closure" id=".service_locator.6MPLMZ9.App\Controller\Admin\MonthlyStatementController::index()"/>
+        <argument key="App\Controller\Admin\MonthlyStatementController::new" type="service_closure" id=".service_locator.3BoFVFw.App\Controller\Admin\MonthlyStatementController::new()"/>
+        <argument key="App\Controller\Admin\MonthlyStatementController::edit" type="service_closure" id=".service_locator.I9P0la6.App\Controller\Admin\MonthlyStatementController::edit()"/>
+        <argument key="App\Controller\Admin\MonthlyStatementController::delete" type="service_closure" id=".service_locator.I9P0la6.App\Controller\Admin\MonthlyStatementController::delete()"/>
+        <argument key="App\Controller\Admin\SecurityController::login" type="service_closure" id=".service_locator.0MQaTBY.App\Controller\Admin\SecurityController::login()"/>
         <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.ya7DQk8.App\Controller\HomeController::index()"/>
         <argument key="App\Controller\ProjectController::index" type="service_closure" id=".service_locator.o9o9vJm.App\Controller\ProjectController::index()"/>
         <argument key="App\Controller\ProjectController::new" type="service_closure" id=".service_locator.agvzoDf.App\Controller\ProjectController::new()"/>
@@ -8659,6 +9061,12 @@
         <argument key="App\Controller\ProjectController::moderateReject" type="service_closure" id=".service_locator.es0Ly41.App\Controller\ProjectController::moderateReject()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.1vYpZ1B.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.1vYpZ1B.kernel::loadRoutes()"/>
+        <argument key="App\Controller\Admin\DashboardController:index" type="service_closure" id=".service_locator.6MPLMZ9.App\Controller\Admin\DashboardController::index()"/>
+        <argument key="App\Controller\Admin\MonthlyStatementController:index" type="service_closure" id=".service_locator.6MPLMZ9.App\Controller\Admin\MonthlyStatementController::index()"/>
+        <argument key="App\Controller\Admin\MonthlyStatementController:new" type="service_closure" id=".service_locator.3BoFVFw.App\Controller\Admin\MonthlyStatementController::new()"/>
+        <argument key="App\Controller\Admin\MonthlyStatementController:edit" type="service_closure" id=".service_locator.I9P0la6.App\Controller\Admin\MonthlyStatementController::edit()"/>
+        <argument key="App\Controller\Admin\MonthlyStatementController:delete" type="service_closure" id=".service_locator.I9P0la6.App\Controller\Admin\MonthlyStatementController::delete()"/>
+        <argument key="App\Controller\Admin\SecurityController:login" type="service_closure" id=".service_locator.0MQaTBY.App\Controller\Admin\SecurityController::login()"/>
         <argument key="App\Controller\HomeController:index" type="service_closure" id=".service_locator.ya7DQk8.App\Controller\HomeController::index()"/>
         <argument key="App\Controller\ProjectController:index" type="service_closure" id=".service_locator.o9o9vJm.App\Controller\ProjectController::index()"/>
         <argument key="App\Controller\ProjectController:new" type="service_closure" id=".service_locator.agvzoDf.App\Controller\ProjectController::new()"/>
@@ -8853,10 +9261,11 @@
       <argument type="service" id="argument_resolver.header_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.bS2e.mS" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.6RSaJ4N" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\ContactType" type="service_closure" id="App\Form\ContactType"/>
+        <argument key="App\Form\MonthlyStatementType" type="service_closure" id="App\Form\MonthlyStatementType"/>
         <argument key="App\Form\ProjectProposalType" type="service_closure" id="App\Form\ProjectProposalType"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service_closure" id="form.type.form"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
@@ -9007,10 +9416,12 @@
         <argument key="turbo.doctrine.event_listener" type="service_closure" id="turbo.doctrine.event_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.jh4r_oM" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.2gEb1Jf" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\MonthlyStatementRepository" type="service_closure" id="App\Repository\MonthlyStatementRepository"/>
         <argument key="App\Repository\ProjectRepository" type="service_closure" id="App\Repository\ProjectRepository"/>
+        <argument key="App\Repository\UserRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
     <service id=".service_locator.W55Po6X" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -9278,6 +9689,24 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.TJNRSaV.App\Controller\Admin\DashboardController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\DashboardController"/>
+      <argument>App\Controller\Admin\DashboardController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Controller\Admin\MonthlyStatementController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\MonthlyStatementController"/>
+      <argument>App\Controller\Admin\MonthlyStatementController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
+    <service id=".service_locator.TJNRSaV.App\Controller\Admin\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\SecurityController"/>
+      <argument>App\Controller\Admin\SecurityController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TJNRSaV" method="withContext"/>
+    </service>
     <service id=".service_locator.TJNRSaV.App\Controller\BlogController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\BlogController"/>
       <argument>App\Controller\BlogController</argument>
@@ -9526,6 +9955,9 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+          <argument>App\Controller\Admin\DashboardController</argument>
+          <argument>App\Controller\Admin\MonthlyStatementController</argument>
+          <argument>App\Controller\Admin\SecurityController</argument>
           <argument>App\Controller\BlogController</argument>
           <argument>App\Controller\HomeController</argument>
           <argument>App\Controller\LegalController</argument>
@@ -9777,6 +10209,16 @@
     </service>
     <service id=".errored..service_locator.1vYpZ1B.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.1vYpZ1B&quot;: it needs an instance of &quot;Symfony\Component\Config\Loader\LoaderInterface&quot; but this type has been excluded from autowiring."/>
+    </service>
+    <service id=".errored..service_locator.I9P0la6.App\Entity\MonthlyStatement" class="App\Entity\MonthlyStatement">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.I9P0la6&quot;: it needs an instance of &quot;App\Entity\MonthlyStatement&quot; but this type has been excluded because it's a Doctrine entity."/>
+    </service>
+    <service id=".App\Command\CreateAdminUserCommand.lazy" class="Symfony\Component\Console\Command\LazyCommand">
+      <argument>app:admin:create-user</argument>
+      <argument type="collection"/>
+      <argument>Crée ou met à jour le compte administrateur unique</argument>
+      <argument>false</argument>
+      <argument type="service_closure" id="App\Command\CreateAdminUserCommand"/>
     </service>
     <service id=".console.command.dotenv_debug.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>debug:dotenv</argument>
@@ -10492,8 +10934,9 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.9DS0Bp8"/>
+      <argument type="service" id=".service_locator.ADV85HU"/>
       <argument type="collection">
+        <argument key="app:admin:create-user">App\Command\CreateAdminUserCommand</argument>
         <argument key="debug:dotenv">console.command.dotenv_debug</argument>
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -10618,9 +11061,10 @@
         <argument key="make:webhook">maker.auto_command.make_webhook</argument>
       </argument>
     </service>
-    <service id=".service_locator.9DS0Bp8" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ADV85HU" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Command\CreateAdminUserCommand" type="service_closure" id=".App\Command\CreateAdminUserCommand.lazy"/>
         <argument key="console.command.dotenv_debug" type="service_closure" id=".console.command.dotenv_debug.lazy"/>
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
         <argument key="console.command.assets_install" type="service_closure" id=".console.command.assets_install.lazy"/>
@@ -10810,6 +11254,15 @@
     </service>
     <service id="cache.http_client.pool.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
       <argument>j0-9diqaXP</argument>
+      <argument>0</argument>
+      <argument>/var/www/sksystems/var/share/dev/pools/app</argument>
+      <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
+      <call method="setLogger">
+        <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="cache.rate_limiter.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
+      <argument>0qql4J2wnK</argument>
       <argument>0</argument>
       <argument>/var/www/sksystems/var/share/dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
@@ -11020,9 +11473,13 @@
     <service id="Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface" alias="security.user_password_hasher"/>
     <service id="Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface" alias="security.user_authenticator"/>
     <service id="security.firewall" alias="debug.security.firewall"/>
-    <service id="security.user_providers" alias="security.user.provider.concrete.users_in_memory"/>
-    <service id="Symfony\Component\Security\Core\User\UserProviderInterface" alias="security.user.provider.concrete.users_in_memory"/>
+    <service id="security.user_providers" alias="security.user.provider.concrete.app_user_provider"/>
+    <service id="Symfony\Component\Security\Core\User\UserProviderInterface" alias="security.user.provider.concrete.app_user_provider"/>
     <service id="security.authentication.session_strategy.main" alias="security.authentication.session_strategy"/>
+    <service id=".Symfony\Component\RateLimiter\RateLimiterFactoryInterface $_login_local_main" alias="limiter._login_local_main"/>
+    <service id="Symfony\Component\RateLimiter\RateLimiterFactoryInterface $loginLocalMainLimiter" alias="limiter._login_local_main"/>
+    <service id=".Symfony\Component\RateLimiter\RateLimiterFactoryInterface $_login_global_main" alias="limiter._login_global_main"/>
+    <service id="Symfony\Component\RateLimiter\RateLimiterFactoryInterface $loginGlobalMainLimiter" alias="limiter._login_global_main"/>
     <service id="security.user_checker.main" alias="security.user_checker"/>
     <service id="security.firewall.context_locator" alias=".service_locator.Bz.C4As"/>
     <service id="security.firewall_config_locator" alias=".service_locator.96stvkv"/>
@@ -11033,7 +11490,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.ryAvHi4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.PT_6z2r"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.Pu2ljOZ"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.W55Po6X"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id=".Psr\Log\LoggerInterface $console" alias="monolog.logger.console"/>
@@ -11093,6 +11550,10 @@
     <service id=".signing.messenger.default_serializer.inner" alias="messenger.transport.native_php_serializer"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.c0wzfI4" alias=".service_locator.1vYpZ1B"/>
+    <service id=".service_locator.v6B1DyP" alias=".service_locator.6MPLMZ9"/>
+    <service id=".service_locator.UOV1jy9" alias=".service_locator.3BoFVFw"/>
+    <service id=".service_locator.nVF7Shu" alias=".service_locator.I9P0la6"/>
+    <service id=".service_locator.uBwBrvQ" alias=".service_locator.0MQaTBY"/>
     <service id=".service_locator.F1.GGVN" alias=".service_locator.ya7DQk8"/>
     <service id=".service_locator.UjSR7mo" alias=".service_locator.o9o9vJm"/>
     <service id=".service_locator.XIksCmf" alias=".service_locator.agvzoDf"/>
