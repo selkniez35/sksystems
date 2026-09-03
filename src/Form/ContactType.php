@@ -24,11 +24,25 @@ class ContactType extends AbstractType
                     new Length(max: 100),
                 ],
             ])
+            ->add('firstName', TextType::class, [
+                'label' => 'Prénom',
+                'required' => false,
+                'constraints' => [
+                    new Length(max: 100),
+                ],
+            ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'constraints' => [
                     new NotBlank(message: 'Merci d\'indiquer votre email.'),
                     new Email(message: 'Cet email n\'est pas valide.'),
+                ],
+            ])
+            ->add('phone', TextType::class, [
+                'label' => 'Téléphone',
+                'required' => false,
+                'constraints' => [
+                    new Length(max: 30),
                 ],
             ])
             ->add('subject', TextType::class, [

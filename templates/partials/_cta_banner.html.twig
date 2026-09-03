@@ -1,0 +1,48 @@
+{% set cta_title = cta_title|default('Vous avez un projet ?') %}
+{% set cta_highlight = cta_highlight|default('Discutons-en !') %}
+{% set cta_text = cta_text|default("De l'idée à la mise en ligne, nous transformons vos idées en solutions digitales performantes.") %}
+{% set cta_items = cta_items|default([
+    'Réponse rapide sous 24h',
+    'Écoute et conseil personnalisés',
+    'Devis gratuit et sans engagement',
+]) %}
+
+<section class="py-4 cta-banner-section">
+    <div class="container">
+        <div class="cta-banner">
+
+            <div class="cta-banner-lead">
+                <span class="cta-banner-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M22 2L11 13"/>
+                        <path d="M22 2l-7 20-4-9-9-4 20-7z"/>
+                    </svg>
+                </span>
+                <span class="cta-banner-title">
+                    {{ cta_title }}<br>
+                    <span class="text-gradient">{{ cta_highlight }}</span>
+                </span>
+            </div>
+
+            <div class="cta-banner-body">
+                <p>{{ cta_text }}</p>
+                <ul class="cta-banner-checklist">
+                    {% for item in cta_items %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="cta-banner-action">
+                <button type="button" class="btn btn-primary btn-lg" data-action="quote-modal#open">
+                    Demander un devis ↗
+                </button>
+            </div>
+
+            <span class="cta-banner-watermark" aria-hidden="true">
+                <img src="{{ asset('images/logos/sk-monogramme.png') }}" alt="">
+            </span>
+
+        </div>
+    </div>
+</section>

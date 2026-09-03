@@ -1,0 +1,148 @@
+<div class="quote-modal" data-quote-modal-target="overlay" hidden>
+    <div class="quote-modal-backdrop" data-action="click->quote-modal#close"></div>
+
+    <div class="quote-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+
+        <div class="quote-modal-aside">
+            <span class="section-eyebrow section-eyebrow--light">Devis gratuit</span>
+            <h3 class="quote-modal-aside-title">
+                Parlons de<br>votre <span class="text-gradient">projet</span>
+            </h3>
+            <p>
+                Décrivez-nous votre besoin et nous vous répondrons
+                avec une proposition adaptée à vos objectifs.
+            </p>
+
+            <ul class="quote-modal-benefits">
+                <li>
+                    <span class="quote-modal-benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                    </span>
+                    <span>
+                        <strong>Réponse rapide</strong>
+                        Nous revenons vers vous sous 24h ouvrées maximum.
+                    </span>
+                </li>
+                <li>
+                    <span class="quote-modal-benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </span>
+                    <span>
+                        <strong>Devis gratuit</strong>
+                        Une estimation claire, détaillée et sans engagement.
+                    </span>
+                </li>
+                <li>
+                    <span class="quote-modal-benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </span>
+                    <span>
+                        <strong>Accompagnement dédié</strong>
+                        Un interlocuteur unique à chaque étape de votre projet.
+                    </span>
+                </li>
+            </ul>
+
+            <div class="quote-modal-visual" aria-hidden="true">
+                <div class="quote-modal-cube">
+                    <span class="cube-face cube-face--top"></span>
+                    <span class="cube-face cube-face--left"></span>
+                    <span class="cube-face cube-face--right"></span>
+                </div>
+                <img src="{{ asset('images/logos/sk-monogramme.png') }}" alt="" class="quote-modal-visual-logo">
+            </div>
+        </div>
+
+        <div class="quote-modal-form-panel">
+
+            <button type="button" class="quote-modal-close" data-action="quote-modal#close" aria-label="Fermer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+            </button>
+
+            <h3 id="quoteModalTitle">Décrivez votre <span class="text-gradient">projet</span></h3>
+            <p class="quote-modal-subtitle">Plus vous nous en dites, plus notre réponse sera précise.</p>
+
+            <form action="{{ path('app_quote_new') }}" method="post" enctype="multipart/form-data" class="quote-form contact-form">
+
+                <input type="hidden" name="quote_request[_token]" value="{{ csrf_token('quote_request') }}">
+
+                <div class="field-honeypot" aria-hidden="true">
+                    <label for="quote_website">Laissez ce champ vide</label>
+                    <input type="text" id="quote_website" name="quote_request[website]" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="quote_lastName">Nom *</label>
+                        <input type="text" id="quote_lastName" name="quote_request[lastName]" class="form-control" placeholder="Votre nom" required maxlength="100">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="quote_firstName">Prénom *</label>
+                        <input type="text" id="quote_firstName" name="quote_request[firstName]" class="form-control" placeholder="Votre prénom" required maxlength="100">
+                    </div>
+                    <div class="col-12">
+                        <label for="quote_email">Email *</label>
+                        <input type="email" id="quote_email" name="quote_request[email]" class="form-control" placeholder="exemple@entreprise.com" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="quote_phone">Téléphone</label>
+                        <input type="tel" id="quote_phone" name="quote_request[phone]" class="form-control" placeholder="07 55 46 43 76" maxlength="30">
+                    </div>
+                    <div class="col-12">
+                        <label for="quote_projectType">Type de projet *</label>
+                        <select id="quote_projectType" name="quote_request[projectType]" class="form-control" required>
+                            <option value="" selected disabled>Sélectionnez le type de projet</option>
+                            <option value="site_web">Site web</option>
+                            <option value="application_web">Application web</option>
+                            <option value="mvp">MVP</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="quote_budget">Budget estimé</label>
+                        <select id="quote_budget" name="quote_request[budget]" class="form-control">
+                            <option value="" selected>Sélectionnez une fourchette de budget</option>
+                            <option value="lt_2000">Moins de 2 000 €</option>
+                            <option value="2000_5000">2 000 € - 5 000 €</option>
+                            <option value="5000_10000">5 000 € - 10 000 €</option>
+                            <option value="gt_10000">Plus de 10 000 €</option>
+                            <option value="unknown">Je ne sais pas encore</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <div class="quote-form-label-row">
+                            <label for="quote_description">Décrivez votre projet *</label>
+                            <span class="quote-form-counter" data-quote-modal-target="counter">0 / 1000</span>
+                        </div>
+                        <textarea id="quote_description" name="quote_request[description]" class="form-control" rows="4" maxlength="1000" required
+                                  placeholder="Parlez-nous de vos besoins, de vos objectifs, des fonctionnalités souhaitées, de votre cible, des délais envisagés..."
+                                  data-quote-modal-target="description" data-action="input->quote-modal#updateCount"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label for="quote_attachment" class="quote-form-file">
+                            <span class="quote-form-file-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                            </span>
+                            <span>
+                                <strong>Ajouter un fichier (facultatif)</strong>
+                                <span data-quote-modal-target="fileName">Cahier des charges, maquettes, documents... (PDF, PNG, JPG – Max. 10 Mo)</span>
+                            </span>
+                        </label>
+                        <input type="file" id="quote_attachment" name="quote_request[attachment]" accept=".pdf,.png,.jpg,.jpeg"
+                               class="quote-form-file-input" data-quote-modal-target="fileInput" data-action="change->quote-modal#updateFileName">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                    Envoyer la demande de devis
+                </button>
+
+                <p class="quote-form-note">🔒 Vos données sont confidentielles et ne seront jamais partagées.</p>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>

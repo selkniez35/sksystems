@@ -2,14 +2,8 @@
     {% set featured = projects|filter(p => p.image is not null) %}
     {% set others = projects|filter(p => p.image is null) %}
 
-    <section id="realisations" class="py-5 py-lg-6 projects-section">
+    <section class="py-5 py-lg-6 projects-section">
         <div class="container">
-
-            <div class="text-center mb-5">
-                <span class="section-eyebrow">Réalisations</span>
-                <h2 class="fw-bold">Ce que j'ai développé</h2>
-                <p class="text-muted">Deux plateformes livrées de bout en bout.</p>
-            </div>
 
             {% for project in featured %}
                 <div class="case-study {{ loop.index0 is odd ? 'case-study--reverse' : '' }}">

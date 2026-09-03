@@ -85,6 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-navbar .nav-link {
+    position: relative;
     color: rgba(255, 255, 255, .75) !important;
     font-weight: 500;
     padding: .5rem 1rem !important;
@@ -93,6 +94,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .site-navbar .nav-link:hover {
     color: #fff !important;
+}
+
+.site-navbar .nav-link.active {
+    color: #fff !important;
+}
+
+.site-navbar .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: -2px;
+    height: 2px;
+    background: var(--gradient-brand);
+    border-radius: 2px;
 }
 
 main {

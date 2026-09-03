@@ -1,4 +1,4 @@
-<footer id="contact" class="site-footer">
+<footer class="site-footer">
 
     <div class="container">
 
@@ -18,15 +18,16 @@
 
             <div class="footer-brand">
                 <img src="{{ asset('images/logos/sk-logo-sombre.png') }}" alt="SK Systems" height="36">
-                <p class="text-light opacity-50 mb-0">Développeur Symfony freelance</p>
+                <p class="text-light opacity-50 mb-0">Créateur de solutions digitales sur mesure</p>
             </div>
 
             <ul class="footer-links">
-                <li><a href="{{ path('app_home') }}#services">Services</a></li>
-                <li><a href="{{ path('app_home') }}#tarifs">Tarifs</a></li>
-                <li><a href="{{ path('app_home') }}#pourquoi">Pourquoi nous</a></li>
+                <li><a href="{{ path('app_about') }}">À propos</a></li>
+                <li><a href="{{ path('app_services') }}">Services</a></li>
+                <li><a href="{{ path('app_realisations') }}">Réalisations</a></li>
+                <li><a href="{{ path('app_technologies') }}">Technologies</a></li>
+                <li><a href="{{ path('app_contact') }}">Contact</a></li>
                 <li><a href="{{ path('app_blog_index') }}">Blog</a></li>
-                <li><a href="{{ path('app_project_index') }}">Projets</a></li>
                 <li><a href="{{ path('app_legal_notice') }}">Mentions légales</a></li>
                 <li><a href="{{ path('app_terms_of_sale') }}">CGV</a></li>
             </ul>

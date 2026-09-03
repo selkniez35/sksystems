@@ -14,22 +14,27 @@
 
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_home') }}#services">Services</a>
+                    <a class="nav-link {{ app.current_route == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_home') }}#tarifs">Tarifs</a>
+                    <a class="nav-link {{ app.current_route == 'app_about' ? 'active' : '' }}" href="{{ path('app_about') }}">À propos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_home') }}#pourquoi">Pourquoi nous</a>
+                    <a class="nav-link {{ app.current_route == 'app_services' ? 'active' : '' }}" href="{{ path('app_services') }}">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_blog_index') }}">Blog</a>
+                    <a class="nav-link {{ app.current_route == 'app_realisations' ? 'active' : '' }}" href="{{ path('app_realisations') }}">Réalisations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_project_index') }}">Projets</a>
+                    <a class="nav-link {{ app.current_route == 'app_technologies' ? 'active' : '' }}" href="{{ path('app_technologies') }}">Technologies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ app.current_route == 'app_contact' ? 'active' : '' }}" href="{{ path('app_contact') }}">Contact</a>
                 </li>
                 <li class="nav-item ms-lg-3">
-                    <a class="btn btn-primary btn-sm px-3" href="{{ path('app_home') }}#contact">Discutons-en</a>
+                    <button type="button" class="btn btn-primary btn-sm px-3" data-action="quote-modal#open">
+                        Demander un devis ↗
+                    </button>
                 </li>
             </ul>
 

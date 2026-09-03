@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réalisations | SK Systems{% endblock %}
+{% block meta_description %}Découvrez les projets réalisés par SK Systems : sites web, applications métiers et plateformes sur mesure livrés de bout en bout.{% endblock %}
+{% block og_title %}Réalisations | SK Systems{% endblock %}
+
+{% block body %}
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="row align-items-center g-4">
+
+                <div class="col-lg-7">
+                    <span class="hero-badge page-hero-eyebrow">NOS RÉALISATIONS</span>
+
+                    <h1 class="display-4 fw-bold text-white mt-3">
+                        Des projets concrets,<br>
+                        des <span class="text-gradient">résultats mesurables.</span>
+                    </h1>
+
+                    <p class="page-hero-lead mt-4">
+                        Découvrez une sélection de projets réalisés pour des entreprises
+                        et organisations de divers secteurs. Chaque solution est pensée
+                        pour répondre à un besoin précis et générer de la valeur.
+                    </p>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="page-hero-stats">
+
+                        <div class="page-hero-stat">
+                            <span class="page-hero-stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                                    <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                                </svg>
+                            </span>
+                            <strong>Projets sur mesure</strong>
+                            <span>100% adaptés</span>
+                        </div>
+
+                        <div class="page-hero-stat">
+                            <span class="page-hero-stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/>
+                                    <path d="M9 12l2 2 4-4"/>
+                                </svg>
+                            </span>
+                            <strong>Technologies robustes</strong>
+                            <span>Sécurisées &amp; évolutives</span>
+                        </div>
+
+                        <div class="page-hero-stat">
+                            <span class="page-hero-stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M3 17l6-6 4 4 8-8"/>
+                                    <path d="M15 6h6v6"/>
+                                </svg>
+                            </span>
+                            <strong>Résultats concrets</strong>
+                            <span>Performance &amp; impact</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <svg class="hero-curve" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,60 C280,10 520,90 800,50 C1080,10 1260,80 1440,30 L1440,110 L0,110 Z"/>
+        </svg>
+    </section>
+
+    {% include 'partials/_projects.html.twig' %}
+
+    {% include 'partials/_recommendations.html.twig' %}
+
+    {% include 'partials/_cta_banner.html.twig' %}
+
+{% endblock %}

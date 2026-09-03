@@ -10,7 +10,7 @@
         </title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="{% block meta_description %}SK Systems - Développeur Symfony freelance : sites web, applications métiers et MVP sur mesure.{% endblock %}">
+        <meta name="description" content="{% block meta_description %}SK Systems - Agence de développement web : sites web, applications web et MVP sur mesure.{% endblock %}">
         <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.pathInfo }}">
         <link rel="icon" href="{{ asset('images/logos/sk-favicon-clair.png') }}" type="image/png">
 
@@ -37,7 +37,6 @@
             "url": "{{ app.request.schemeAndHttpHost }}/",
             "email": "samy.elkniez@sksystems.fr",
             "telephone": "+33755464376",
-            "priceRange": "300 EUR/jour",
             "founder": {
                 "@type": "Person",
                 "name": "Samy EL KNIEZ"
@@ -50,7 +49,7 @@
                 "addressCountry": "FR"
             },
             "areaServed": "France",
-            "description": "Développeur Symfony freelance : sites web, applications métiers et MVP sur mesure."
+            "description": "Agence de développement web : sites web, applications web et MVP sur mesure."
         }
         </script>
         {% endblock %}
@@ -65,9 +64,16 @@
 
     </head>
 
-    <body>
+    <body data-controller="quote-modal">
 
         {% include 'partials/_navbar.html.twig' %}
+
+        {% for message in app.flashes('quote_success') %}
+            <div class="global-flash global-flash--success" role="status">{{ message }}</div>
+        {% endfor %}
+        {% for message in app.flashes('quote_error') %}
+            <div class="global-flash global-flash--error" role="alert">{{ message }}</div>
+        {% endfor %}
 
         <main>
 
@@ -76,6 +82,8 @@
         </main>
 
         {% include 'partials/_footer.html.twig' %}
+
+        {% include 'partials/_quote_modal.html.twig' %}
 
         {% block javascripts %}
 
