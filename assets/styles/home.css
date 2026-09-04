@@ -493,6 +493,12 @@ section {
     margin-bottom: 24px;
 }
 
+.service-card .icon svg {
+    width: 28px;
+    height: 28px;
+    color: var(--primary);
+}
+
 .service-card h4 {
     font-weight: 700;
     margin-bottom: 12px;
@@ -911,6 +917,12 @@ section {
     border-radius: 14px;
     background: var(--light);
     border: 1px solid rgba(15, 23, 42, .06);
+}
+
+.feature-item .icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--primary);
 }
 
 .feature-item h5 {

@@ -6,6 +6,8 @@ import './styles/home.css';
 import './styles/blog.css';
 import './styles/project.css';
 
+import './stimulus_bootstrap';
+
 console.log('SK Systems loaded');
 /*
  * Welcome to your app's main JavaScript file!
