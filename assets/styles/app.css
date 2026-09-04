@@ -79,7 +79,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 575.98px) {
     .navbar-brand img {
-        max-height: 32px;
+        max-height: 42px;
         width: auto;
     }
 }
@@ -173,7 +173,7 @@ main {
     }
 
     .footer-brand img {
-        max-height: 28px;
+        max-height: 36px;
         width: auto;
     }
 }
