@@ -15,7 +15,7 @@
     "datePublished": "{{ article.publishedAt|date('Y-m-d') }}",
     "dateModified": "{{ article.publishedAt|date('Y-m-d') }}",
     "url": "{{ url('app_blog_show', { slug: article.slug }) }}",
-    "image": "{{ absolute_url(asset('images/logos/sk-logo-sur-accent.png')) }}",
+    "image": "{{ absolute_url(asset('images/logos/sk-logo-fond-clair.png')) }}",
     "author": {
         "@type": "Person",
         "name": "Samy EL KNIEZ"
@@ -25,7 +25,7 @@
         "name": "SK Systems",
         "logo": {
             "@type": "ImageObject",
-            "url": "{{ absolute_url(asset('images/logos/sk-logo-sur-accent.png')) }}"
+            "url": "{{ absolute_url(asset('images/logos/sk-logo-fond-clair.png')) }}"
         }
     }
 }
