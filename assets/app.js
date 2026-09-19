@@ -5,7 +5,6 @@ import './styles/app.css';
 import './styles/home.css';
 import './styles/blog.css';
 import './styles/project.css';
-import './styles/theme.css';
 
 import './stimulus_bootstrap';
 
