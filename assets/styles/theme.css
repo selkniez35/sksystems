@@ -1,0 +1,392 @@
+/*
+ * Thème clair et épuré — chargé en dernier, surcharge les styles historiques
+ * de app.css / home.css / blog.css / project.css.
+ */
+
+:root {
+    --ink: #0F172A;
+    --ink-soft: #334155;
+    --text-muted: #64748B;
+    --line: #E2E8F0;
+    --surface: #FFFFFF;
+    --light: #F8FAFC;
+
+    --radius: 14px;
+    --radius-lg: 20px;
+
+    --shadow-soft: 0 1px 2px rgba(15, 23, 42, .04), 0 4px 16px rgba(15, 23, 42, .05);
+    --shadow-strong: 0 24px 60px -12px rgba(15, 23, 42, .18);
+}
+
+body {
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--ink);
+    letter-spacing: -0.03em;
+}
+
+h2 { font-size: clamp(1.75rem, 3vw, 2.4rem); line-height: 1.2; }
+
+/* ---------- Boutons ---------- */
+
+.btn {
+    border-radius: 999px;
+    padding: .7rem 1.5rem;
+    font-weight: 600;
+}
+
+.btn-lg { padding: .85rem 1.9rem; font-size: 1rem; }
+
+.btn-primary {
+    background: var(--primary);
+    box-shadow: 0 1px 2px rgba(37, 99, 235, .3), 0 6px 16px -4px rgba(37, 99, 235, .4);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+    background: var(--primary-dark);
+    box-shadow: 0 1px 2px rgba(37, 99, 235, .3), 0 10px 22px -4px rgba(37, 99, 235, .5);
+}
+
+.btn-outline-light {
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+}
+
+.btn-outline-light:hover,
+.btn-outline-light:focus-visible {
+    color: var(--ink);
+    background: var(--light);
+    border-color: #CBD5E1;
+}
+
+/* ---------- Navbar ---------- */
+
+.site-navbar {
+    background: rgba(255, 255, 255, .88);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--line);
+    padding-top: .35rem;
+    padding-bottom: .35rem;
+}
+
+.navbar-brand img {
+    height: 64px;
+    width: auto;
+    margin: -12px 0;
+}
+
+@media (max-width: 575.98px) {
+    .navbar-brand img { max-height: 56px; }
+}
+
+.site-navbar .nav-link {
+    color: var(--ink-soft) !important;
+    font-size: .95rem;
+    padding: .5rem .9rem !important;
+}
+
+.site-navbar .nav-link:hover,
+.site-navbar .nav-link.active { color: var(--primary) !important; }
+
+.site-navbar .nav-link.active::after { display: none; }
+
+.site-navbar .navbar-toggler {
+    border: 1px solid var(--line);
+    padding: .4rem .6rem;
+}
+
+.site-navbar .navbar-toggler:focus { box-shadow: 0 0 0 3px rgba(37, 99, 235, .2); }
+
+@media (max-width: 991.98px) {
+    .site-navbar .navbar-collapse { padding: .75rem 0 1rem; }
+    .site-navbar .nav-item.ms-lg-3 { margin-top: .5rem; }
+}
+
+/* ---------- Héros (accueil + pages) ---------- */
+
+.hero-section,
+.page-hero,
+.blog-hero,
+.project-hero {
+    background:
+        radial-gradient(60% 80% at 85% 0%, rgba(56, 189, 248, .14), transparent 60%),
+        radial-gradient(50% 70% at 0% 100%, rgba(37, 99, 235, .08), transparent 60%),
+        linear-gradient(180deg, #F8FAFF 0%, #FFFFFF 100%);
+    border-bottom: 1px solid var(--line);
+}
+
+.hero-section::before,
+.hero-section::after,
+.page-hero::before,
+.page-hero::after,
+.hero-curve { display: none; }
+
+.hero-section {
+    min-height: 0;
+    padding: 9rem 0 6rem;
+    text-align: center;
+}
+
+.page-hero { padding: 8.5rem 0 4.5rem; }
+
+.blog-hero,
+.project-hero { padding-top: 8.5rem !important; }
+
+@media (max-width: 767.98px) {
+    .hero-section { padding: 7rem 0 3.5rem; }
+    .page-hero { padding: 7rem 0 3rem; }
+}
+
+.min-vh-75 { min-height: 0; }
+
+/* Les gabarits forcent text-white / text-light pour l'ancien fond sombre */
+.hero-section .text-white,
+.page-hero .text-white { color: var(--ink) !important; }
+
+.hero-section .text-light,
+.hero-section .lead { color: var(--text-muted) !important; opacity: 1 !important; }
+
+.hero-section h1 {
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    line-height: 1.08;
+}
+
+.page-hero h1 {
+    font-size: clamp(2.1rem, 4.5vw, 3.25rem);
+    line-height: 1.12;
+}
+
+.hero-section .lead {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.2rem;
+}
+
+.page-hero-lead {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 620px;
+}
+
+.blog-hero h1,
+.project-hero h1 { color: var(--ink); }
+
+.blog-hero .section-eyebrow,
+.project-hero .section-eyebrow { color: var(--primary); }
+
+.blog-hero .lead,
+.project-hero .lead { color: var(--text-muted) !important; }
+
+.project-hero a:not(.btn) { color: var(--primary); }
+
+.text-gradient {
+    background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-badge {
+    background: #EFF6FF;
+    border: 1px solid #DBEAFE;
+    color: var(--primary);
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    padding: .4rem .9rem;
+}
+
+.hero-badge--brand { color: var(--primary); }
+
+.section-eyebrow { font-size: .75rem; letter-spacing: .12em; }
+.section-eyebrow--light { color: var(--secondary); }
+
+/* Rangée « Performance / Sécurité / Évolutivité » */
+
+.hero-features {
+    justify-content: center;
+    border-top: 0;
+    margin-top: 3rem;
+    padding-top: 0;
+    gap: 1rem;
+}
+
+.hero-features--no-border { justify-content: flex-start; margin-top: 1.75rem !important; }
+
+.hero-feature {
+    color: var(--ink-soft);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: .45rem 1rem .45rem .8rem;
+    font-size: .88rem;
+    box-shadow: var(--shadow-soft);
+}
+
+.hero-feature svg { color: var(--primary); }
+
+.hero-section .d-flex.flex-wrap { justify-content: center; }
+
+/* Visuels décoratifs (cube, faux laptop, cartes flottantes, enveloppe…) */
+
+.hero-visual,
+.hero-cube,
+.about-hero-visual,
+.tech-hero-visual,
+.contact-hero-visual,
+.services-hero-visual { display: none !important; }
+
+/* Le texte prend toute la largeur quand la colonne visuelle disparaît */
+.hero-section .row > [class*="col-lg-"]:first-child,
+.page-hero .row:has(.about-hero-visual, .tech-hero-visual, .contact-hero-visual, .services-hero-visual) > [class*="col-lg-"]:first-child {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 820px;
+}
+
+.hero-section .row > [class*="col-lg-"]:first-child { margin: 0 auto; }
+
+.hero-section .row > [class*="col-lg-"]:not(:first-child),
+.page-hero .row:has(.about-hero-visual, .tech-hero-visual, .contact-hero-visual, .services-hero-visual) > [class*="col-lg-"]:not(:first-child) { display: none; }
+
+/* Statistiques de la page Réalisations */
+
+.page-hero-stat-icon {
+    background: #EFF6FF;
+    border-color: #DBEAFE;
+    color: var(--primary);
+}
+
+.page-hero-stat strong { color: var(--ink); }
+.page-hero-stat span { color: var(--text-muted); }
+
+/* ---------- Sections ---------- */
+
+.solutions-section,
+.projects-section,
+.approach-section,
+.recommendations-section { background: var(--surface); }
+
+.cta-banner-section,
+.blog-index-section,
+.project-index-section,
+.project-form-section { background: var(--light); }
+
+@media (min-width: 992px) {
+    .py-lg-6 { padding-top: 6.5rem !important; padding-bottom: 6.5rem !important; }
+}
+
+/* ---------- Cartes ---------- */
+
+.service-card,
+.project-card,
+.blog-card,
+.tech-card,
+.reco-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: none;
+}
+
+.service-card,
+.project-card,
+.blog-card { padding: 2rem; }
+
+.service-card:hover,
+.project-card:hover,
+.blog-card:hover,
+.tech-card:hover {
+    transform: translateY(-3px);
+    border-color: #BFDBFE;
+    box-shadow: var(--shadow-strong);
+}
+
+.service-card .icon,
+.solution-icon,
+.contact-info-icon,
+.tech-card-icon {
+    background: #EFF6FF;
+    border: 1px solid #DBEAFE;
+    color: var(--primary);
+    border-radius: 12px;
+}
+
+.service-card .icon { width: 52px; height: 52px; margin-bottom: 1.25rem; }
+.service-card .icon svg { width: 24px; height: 24px; }
+
+.service-card h4,
+.solution-item h6 { font-size: 1.15rem; }
+
+.project-tag {
+    background: var(--light);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-weight: 500;
+}
+
+.case-study { margin-bottom: 5rem; }
+
+.case-study-visual {
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-strong);
+}
+
+/* ---------- Blocs sombres qui rythment la page ---------- */
+
+.cta-banner {
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    background: var(--ink);
+}
+
+.cta-banner-icon { background: var(--primary); }
+
+@media (max-width: 767.98px) {
+    .cta-banner { padding: 2rem 1.5rem; }
+}
+
+.stats-band { background: var(--ink); }
+.stats-band-curve { display: none; }
+
+/* ---------- Formulaires ---------- */
+
+.form-control,
+.form-select {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: .75rem 1rem;
+    background: var(--surface);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+    background: var(--ink);
+    padding: 5rem 0 2rem;
+}
+
+.footer-brand img { height: 46px; width: auto; }
+.footer-links { flex-wrap: wrap; gap: .75rem 1.5rem; }
+
+/* ---------- Divers ---------- */
+
+.global-flash { margin-top: 72px; }
+
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
