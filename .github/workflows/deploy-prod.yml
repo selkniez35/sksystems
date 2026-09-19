@@ -142,5 +142,12 @@ jobs:
             - name: Mettre à jour le clone /opt
               if: steps.check.outputs.on_main == 'true'
               run: |
+                  # .env.local contient les secrets de prod. Il a été suivi par git
+                  # avant d'être ignoré : tant que le clone est sur un ancien commit
+                  # qui le suit, le checkout le supprimerait. On le met donc de côté
+                  # et on le restaure quoi qu'il arrive.
+                  env_backup="$(mktemp)"
+                  cp -p /opt/sksystems/.env.local "$env_backup"
+                  trap 'cp -p "$env_backup" /opt/sksystems/.env.local; rm -f "$env_backup"' EXIT
                   git -C /opt/sksystems fetch --tags --quiet
-                  git -C /opt/sksystems checkout "$GITHUB_REF_NAME"
+                  git -C /opt/sksystems checkout -f "$GITHUB_REF_NAME"
