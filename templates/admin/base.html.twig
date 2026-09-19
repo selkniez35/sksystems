@@ -6,7 +6,7 @@
     <title>{% block title %}Administration | SK Systems{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="{{ asset('images/logos/sk-favicon-clair.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/logos/sks-monograme.jpg') }}" type="image/jpeg">
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('admin') }}
@@ -18,7 +18,7 @@
     <nav class="navbar navbar-dark admin-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ app.user ? path('app_admin_dashboard') : path('app_admin_login') }}">
-                <img src="{{ asset('images/logos/sk-logo-sombre.png') }}" alt="SK Systems" height="32">
+                <span class="brand-logo brand-logo--admin"><img src="{{ asset('images/logos/sks-logo-fond-sombre.png') }}" alt="SK Systems"></span>
             </a>
             {% if app.user %}
                 <div class="d-flex align-items-center gap-3">
