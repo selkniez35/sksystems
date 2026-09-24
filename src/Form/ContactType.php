@@ -3,11 +3,13 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Blank;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -24,13 +26,6 @@ class ContactType extends AbstractType
                     new Length(max: 100),
                 ],
             ])
-            ->add('firstName', TextType::class, [
-                'label' => 'Prénom',
-                'required' => false,
-                'constraints' => [
-                    new Length(max: 100),
-                ],
-            ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'constraints' => [
@@ -38,25 +33,34 @@ class ContactType extends AbstractType
                     new Email(message: 'Cet email n\'est pas valide.'),
                 ],
             ])
-            ->add('phone', TextType::class, [
-                'label' => 'Téléphone',
-                'required' => false,
-                'constraints' => [
-                    new Length(max: 30),
+            ->add('subject', ChoiceType::class, [
+                'label' => 'Objet',
+                'placeholder' => 'Sélectionnez un objet',
+                'choices' => [
+                    'Demande de devis' => 'devis',
+                    'Site web' => 'site_web',
+                    'Application web' => 'application_web',
+                    'MVP' => 'mvp',
+                    'Autre' => 'autre',
                 ],
-            ])
-            ->add('subject', TextType::class, [
-                'label' => 'Sujet',
                 'constraints' => [
-                    new NotBlank(message: 'Merci d\'indiquer un sujet.'),
-                    new Length(max: 150),
+                    new NotBlank(message: 'Merci d\'indiquer un objet.'),
                 ],
             ])
             ->add('message', TextareaType::class, [
-                'label' => 'Votre projet',
+                'label' => 'Votre message',
                 'constraints' => [
-                    new NotBlank(message: 'Merci de décrire votre projet.'),
+                    new NotBlank(message: 'Merci de décrire votre demande.'),
                     new Length(min: 10, max: 5000),
+                ],
+            ])
+            // Piège à robots : ce champ doit rester vide (masqué en CSS pour les humains).
+            ->add('website', TextType::class, [
+                'label' => 'Laissez ce champ vide',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new Blank(message: 'Ce champ doit rester vide.'),
                 ],
             ])
         ;

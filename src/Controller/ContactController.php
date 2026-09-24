@@ -14,6 +14,14 @@ final class ContactController extends AbstractController
 {
     private const string ADMIN_EMAIL = 'samy.elkniez@sksystems.fr';
 
+    private const array SUBJECT_LABELS = [
+        'devis' => 'Demande de devis',
+        'site_web' => 'Site web',
+        'application_web' => 'Application web',
+        'mvp' => 'MVP',
+        'autre' => 'Autre',
+    ];
+
     #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
     public function index(Request $request, TransportInterface $mailerTransport): Response
     {
@@ -22,24 +30,24 @@ final class ContactController extends AbstractController
 
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
             $data = $contactForm->getData();
+            $subjectLabel = self::SUBJECT_LABELS[$data['subject']] ?? $data['subject'];
 
             $email = (new Email())
                 ->from(self::ADMIN_EMAIL)
                 ->replyTo($data['email'])
                 ->to(self::ADMIN_EMAIL)
-                ->subject('[Site SK Systems] ' . $data['subject'])
+                ->subject('[Site SK Systems] ' . $subjectLabel)
                 ->text(sprintf(
-                    "Nom : %s %s\nEmail : %s\nTéléphone : %s\n\n%s",
-                    $data['firstName'] ?? '',
+                    "Nom : %s\nEmail : %s\nObjet : %s\n\n%s",
                     $data['name'],
                     $data['email'],
-                    $data['phone'] ?: 'non précisé',
+                    $subjectLabel,
                     $data['message'],
                 ));
 
             $mailerTransport->send($email);
 
-            $this->addFlash('contact_success', 'Merci, votre message a bien été envoyé — nous vous répondrons rapidement.');
+            $this->addFlash('contact_success', 'Merci, votre message a bien été envoyé. Je vous réponds sous 24 à 48h.');
 
             return $this->redirectToRoute('app_contact', [], Response::HTTP_SEE_OTHER);
         }
