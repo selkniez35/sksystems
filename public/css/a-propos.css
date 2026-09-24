@@ -14,10 +14,9 @@
 
 @media (min-width: 992px) {
     .hero-a-propos {
-        min-height: 58vh;
-        display: flex;
-        align-items: center;
-        padding-top: 5.5rem;
+        min-height: 480px;
+        padding-top: 12rem;
+        padding-bottom: 6rem;
     }
 
     .hero-a-propos-bg {
@@ -43,7 +42,7 @@
     }
 
     .hero-a-propos-copy {
-        max-width: 660px;
+        max-width: 620px;
     }
 }
 
@@ -69,7 +68,7 @@
     font-weight: 800;
     line-height: 1.12;
     letter-spacing: -.03em;
-    font-size: clamp(2.3rem, 3.9vw, 3.55rem);
+    font-size: clamp(2.1rem, 3.3vw, 3.1rem);
     color: #fff;
 }
 
