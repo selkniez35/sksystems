@@ -1,0 +1,280 @@
+/* ==========================================================================
+   Page À propos : hero sombre (photo) + section "Notre approche"
+   Fichier charge en simple <link> statique (pas de build), voir base.html.twig
+   Reutilise les variables et boutons definis pour l'accueil (voir accueil.css)
+   ========================================================================== */
+
+/* ---------- Hero À propos ---------- */
+
+.hero-a-propos {
+    position: relative;
+    overflow: hidden;
+    background: #060b18;
+}
+
+@media (min-width: 992px) {
+    .hero-a-propos {
+        aspect-ratio: 1672 / 941;
+        min-height: 620px;
+    }
+
+    .hero-a-propos-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url('/images/hero-a-propos.jpg');
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+    }
+
+    .hero-a-propos-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(100deg, rgba(4, 8, 20, .78) 0%, rgba(4, 8, 20, .55) 32%, rgba(4, 8, 20, .1) 58%, transparent 72%);
+        pointer-events: none;
+    }
+
+    .hero-a-propos-copy {
+        position: absolute;
+        left: 9.8%;
+        top: 16.5%;
+        width: 48%;
+        z-index: 2;
+    }
+}
+
+.hero-a-propos-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
+    color: #7db8ff;
+    font-weight: 800;
+    font-size: .78rem;
+    letter-spacing: .14em;
+}
+
+.hero-a-propos-eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    background: #7db8ff;
+}
+
+.hero-a-propos-title {
+    margin: 1.1rem 0 1.4rem;
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -.03em;
+    font-size: clamp(2.3rem, 3.9vw, 3.55rem);
+    color: #fff;
+}
+
+.hero-a-propos-title span {
+    display: block;
+    background-image: linear-gradient(100deg, #1a63e8 10%, #16c4ea 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-a-propos-lead {
+    max-width: 460px;
+    color: rgba(255, 255, 255, .8);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 0;
+}
+
+.hero-a-propos-actions {
+    margin-top: 1.9rem;
+}
+
+@media (max-width: 991.98px) {
+    .hero-a-propos {
+        display: flex;
+        flex-direction: column;
+        padding: 6.5rem 0 2.5rem;
+    }
+
+    .hero-a-propos-bg {
+        order: 2;
+        margin-top: 2rem;
+        height: 220px;
+        background-image: url('/images/hero-a-propos.jpg');
+        background-size: cover;
+        background-position: center;
+        border-radius: 14px;
+    }
+
+    .hero-a-propos-scrim {
+        display: none;
+    }
+
+    .hero-a-propos-copy {
+        order: 1;
+        padding: 0 1.25rem;
+        text-align: center;
+    }
+
+    .hero-a-propos-eyebrow {
+        justify-content: center;
+    }
+
+    .hero-a-propos-lead {
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-a-propos-actions {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-a-propos-actions .btn-hero-primary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ---------- Section "Notre approche" ---------- */
+
+.approche-section {
+    position: relative;
+    overflow: hidden;
+    padding: 3.75rem 0 4.25rem;
+    background: #f8fafd;
+}
+
+.approche-shape {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37, 99, 235, .1), rgba(37, 99, 235, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.approche-shape--left {
+    left: -180px;
+    top: -120px;
+}
+
+.approche-shape--right {
+    right: -180px;
+    bottom: -140px;
+}
+
+.approche-header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 2.25rem;
+}
+
+.approche-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .9rem;
+    color: var(--primary);
+    font-weight: 800;
+    font-size: .78rem;
+    letter-spacing: .14em;
+}
+
+.approche-eyebrow-line {
+    width: 26px;
+    height: 2px;
+    background: var(--primary);
+}
+
+.approche-title {
+    margin: .9rem 0 0;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+    font-size: clamp(1.7rem, 2.6vw, 2.35rem);
+    color: var(--dark);
+}
+
+.approche-title span {
+    display: block;
+    background-image: linear-gradient(100deg, #1a63e8 10%, #16c4ea 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.approche-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.approche-col {
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.approche-col + .approche-col {
+    border-left: 1px solid rgba(15, 23, 42, .08);
+}
+
+.approche-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.1rem;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, .08);
+    color: var(--primary);
+}
+
+.approche-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.approche-number {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: 800;
+    font-size: 1.9rem;
+    color: var(--primary);
+    letter-spacing: -.02em;
+}
+
+.approche-col h3 {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: .6rem;
+}
+
+.approche-col p {
+    color: var(--text-muted);
+    font-size: .95rem;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 280px;
+}
+
+@media (max-width: 767.98px) {
+    .approche-grid {
+        grid-template-columns: 1fr;
+        row-gap: 2.5rem;
+    }
+
+    .approche-col + .approche-col {
+        border-left: none;
+        padding-top: 2.5rem;
+        border-top: 1px solid rgba(15, 23, 42, .08);
+    }
+}

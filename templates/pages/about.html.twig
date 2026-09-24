@@ -6,57 +6,58 @@
 
 {% block body %}
 
-    <section class="page-hero">
-        <div class="container">
-            <div class="row align-items-center g-5">
+    {% include 'partials/_hero_a_propos.html.twig' %}
 
-                <div class="col-lg-6">
-                    <span class="hero-badge page-hero-eyebrow">À PROPOS DE SK SYSTEMS</span>
+    <section class="approche-section">
+        <div class="approche-shape approche-shape--left" aria-hidden="true"></div>
+        <div class="approche-shape approche-shape--right" aria-hidden="true"></div>
 
-                    <h1 class="display-4 fw-bold text-white mt-3">
-                        Qui <span class="text-gradient">sommes-nous</span> ?
-                    </h1>
+        <div class="container position-relative">
 
-                    <p class="page-hero-lead mt-4">
-                        SK Systems est une agence spécialisée dans la conception et le développement
-                        de solutions digitales sur mesure. Sites web, applications web et MVP :
-                        nous transformons vos idées en produits performants, évolutifs et adaptés
-                        à vos objectifs.
-                    </p>
+            <div class="approche-header">
+                <span class="approche-eyebrow">
+                    <span class="approche-eyebrow-line" aria-hidden="true"></span>
+                    NOTRE APPROCHE
+                    <span class="approche-eyebrow-line" aria-hidden="true"></span>
+                </span>
+                <h2 class="approche-title">
+                    Un accompagnement simple
+                    <span>et efficace</span>
+                </h2>
+            </div>
 
-                    <p class="page-hero-lead mt-3">
-                        Notre approche allie modernité, rigueur et écoute pour vous accompagner
-                        à chaque étape de votre projet, de la conception à la mise en ligne et au-delà.
-                    </p>
+            <div class="approche-grid">
+
+                <div class="approche-col">
+                    <span class="approche-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </span>
+                    <span class="approche-number">01</span>
+                    <h3>Écoute &amp; analyse</h3>
+                    <p>Nous échangeons sur vos besoins et vos objectifs pour définir la meilleure solution.</p>
                 </div>
 
-                <div class="col-lg-6">
-                    <div class="about-hero-visual">
-                        <div class="about-cube" aria-hidden="true">
-                            <span class="cube-face cube-face--top"></span>
-                            <span class="cube-face cube-face--left"></span>
-                            <span class="cube-face cube-face--right"></span>
-                            <img src="{{ asset('images/logos/sk-monogramme.png') }}" alt="" class="about-cube-logo">
-                        </div>
-                        <div class="about-card about-card--code" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                            <span class="hero-float-line"></span>
-                            <span class="hero-float-line hero-float-line--short"></span>
-                        </div>
-                        <div class="about-card about-card--chart" aria-hidden="true">
-                            <svg class="hero-float-chart" viewBox="0 0 100 34" preserveAspectRatio="none">
-                                <polyline points="0,28 16,20 32,24 48,12 64,18 80,6 100,10"/>
-                            </svg>
-                        </div>
-                    </div>
+                <div class="approche-col">
+                    <span class="approche-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </span>
+                    <span class="approche-number">02</span>
+                    <h3>Développement</h3>
+                    <p>Nous concevons une solution sur mesure, performante et adaptée à vos enjeux.</p>
+                </div>
+
+                <div class="approche-col">
+                    <span class="approche-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                    </span>
+                    <span class="approche-number">03</span>
+                    <h3>Mise en ligne &amp; suivi</h3>
+                    <p>Nous assurons le déploiement et restons à vos côtés pour faire évoluer votre projet.</p>
                 </div>
 
             </div>
-        </div>
 
-        <svg class="hero-curve" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0,40 C280,110 480,0 760,30 C1040,60 1200,10 1440,45 L1440,110 L0,110 Z"/>
-        </svg>
+        </div>
     </section>
 
     <section class="py-5 py-lg-6 solutions-section">
@@ -118,56 +119,6 @@
                                 <h5>Transparence</h5>
                                 <p>Communication claire, suivi régulier et totale transparence à chaque étape.</p>
                             </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 py-lg-6 approach-section">
-        <div class="container">
-            <div class="row align-items-center g-5">
-
-                <div class="col-lg-4">
-                    <span class="section-eyebrow">Notre approche</span>
-                    <h2 class="fw-bold">
-                        Un processus clair pour des projets
-                        <span class="text-gradient">réussis.</span>
-                    </h2>
-                    <p class="text-muted mt-3">
-                        Nous suivons une méthode éprouvée pour garantir des résultats
-                        à la hauteur de vos attentes.
-                    </p>
-                </div>
-
-                <div class="col-lg-8">
-                    <div class="about-process">
-
-                        <div class="about-process-step">
-                            <span class="about-process-number">1</span>
-                            <h6>Compréhension</h6>
-                            <p>Nous analysons vos besoins, vos objectifs et votre marché pour poser les bonnes bases.</p>
-                        </div>
-
-                        <div class="about-process-step">
-                            <span class="about-process-number">2</span>
-                            <h6>Conception</h6>
-                            <p>Nous concevons l'architecture, l'interface et l'expérience utilisateur de votre solution.</p>
-                        </div>
-
-                        <div class="about-process-step">
-                            <span class="about-process-number">3</span>
-                            <h6>Développement</h6>
-                            <p>Nous développons avec des technologies modernes, un code propre et sécurisé.</p>
-                        </div>
-
-                        <div class="about-process-step">
-                            <span class="about-process-number">4</span>
-                            <h6>Livraison &amp; suivi</h6>
-                            <p>Nous livrons votre solution et restons à vos côtés pour assurer son évolution.</p>
                         </div>
 
                     </div>
