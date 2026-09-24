@@ -62,11 +62,13 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
+        <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+
     </head>
 
     <body data-controller="quote-modal">
 
-        {% include 'partials/_navbar.html.twig' %}
+        {% include 'partials/_header.html.twig' %}
 
         {% for message in app.flashes('quote_success') %}
             <div class="global-flash global-flash--success" role="status">{{ message }}</div>

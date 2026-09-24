@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light site-header fixed-top">
+    <div class="container">
+
+        <a class="navbar-brand" href="{{ path('app_home') }}">
+            <img src="{{ asset('images/logos/logo-sk-sombre.png') }}" alt="SK Systems" height="48">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Ouvrir le menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+
+            <ul class="navbar-nav mx-auto align-items-lg-center gap-lg-1">
+                <li class="nav-item">
+                    <a class="nav-link {{ app.current_route == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ app.current_route == 'app_about' ? 'active' : '' }}" href="{{ path('app_about') }}">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ app.current_route == 'app_services' ? 'active' : '' }}" href="{{ path('app_services') }}">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ app.current_route == 'app_realisations' ? 'active' : '' }}" href="{{ path('app_realisations') }}">Réalisations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ app.current_route == 'app_technologies' ? 'active' : '' }}" href="{{ path('app_technologies') }}">Technologies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ app.current_route == 'app_contact' ? 'active' : '' }}" href="{{ path('app_contact') }}">Contact</a>
+                </li>
+            </ul>
+
+            <button type="button" class="btn btn-header-cta d-lg-inline-block mt-3 mt-lg-0" data-action="quote-modal#open">
+                Demander un devis <span aria-hidden="true">→</span>
+            </button>
+
+        </div>
+
+    </div>
+</nav>
