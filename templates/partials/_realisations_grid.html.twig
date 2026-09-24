@@ -1,0 +1,68 @@
+{% if projects is defined and projects|length > 0 %}
+    {% set categories = {
+        'site-web': 'Sites web',
+        'application-web': 'Applications web',
+        'application-mobile': 'Applications mobiles',
+        'mvp': 'MVP',
+    } %}
+
+    <section class="realisations-grid-section" data-controller="project-filter">
+        <div class="realisations-grid-shape realisations-grid-shape--left" aria-hidden="true"></div>
+        <div class="realisations-grid-shape realisations-grid-shape--right" aria-hidden="true"></div>
+
+        <div class="container position-relative">
+
+            <div class="realisations-filters" role="group" aria-label="Filtrer les réalisations par catégorie">
+                <button type="button" class="realisations-filter-pill is-active" data-project-filter-target="tab" data-category="all" data-action="click->project-filter#filter" aria-pressed="true">
+                    Tous les projets
+                </button>
+                {% for key, label in categories %}
+                    {% if (projects|filter(p => p.category == key))|length > 0 %}
+                        <button type="button" class="realisations-filter-pill" data-project-filter-target="tab" data-category="{{ key }}" data-action="click->project-filter#filter" aria-pressed="false">
+                            {{ label }}
+                        </button>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="row g-4 realisations-grid-row">
+                {% for project in projects %}
+                    <div class="col-12 col-md-6 col-lg-4" data-project-filter-target="item" data-category="{{ project.category }}">
+                        {% if project.url %}
+                            <a href="{{ project.url }}" target="_blank" rel="noopener" class="realisation-card">
+                        {% else %}
+                            <div class="realisation-card">
+                        {% endif %}
+                                <div class="realisation-card-media">
+                                    <img src="{{ asset(project.image) }}" alt="{{ categories[project.category]|default(project.category) }} : {{ project.description }}" loading="lazy">
+                                </div>
+                                <div class="realisation-card-body">
+                                    <span class="realisation-card-category">{{ categories[project.category]|default(project.category) }}</span>
+                                    <p>{{ project.description }}</p>
+                                    {% if project.url %}
+                                        <span class="realisation-card-arrow" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                        </span>
+                                    {% endif %}
+                                </div>
+                        {% if project.url %}
+                            </a>
+                        {% else %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+{% else %}
+    <section class="realisations-empty-section">
+        <div class="container">
+            <p class="realisations-empty-text">Nos réalisations seront bientôt présentées ici.</p>
+            <button type="button" class="btn-hero-primary" data-action="quote-modal#open">
+                Demander un devis <span aria-hidden="true">→</span>
+            </button>
+        </div>
+    </section>
+{% endif %}
