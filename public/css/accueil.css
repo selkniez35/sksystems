@@ -109,23 +109,6 @@
         z-index: 0;
     }
 
-    .hero-accueil-logo-mug {
-        position: absolute;
-        left: 51%;
-        top: 57.5%;
-        width: 3.6%;
-        aspect-ratio: 1 / 1;
-        border-radius: 50%;
-        overflow: hidden;
-        z-index: 1;
-        pointer-events: none;
-        background-color: rgba(10, 16, 32, .35);
-        background-image: url('/images/logos/logo-sk-clair.png');
-        background-repeat: no-repeat;
-        background-size: 280% auto;
-        background-position: 49% 33%;
-    }
-
     .hero-accueil-copy {
         position: absolute;
         left: 6.4%;
@@ -230,10 +213,6 @@
         flex-direction: column;
         padding: 6.5rem 0 0;
         background: #fff;
-    }
-
-    .hero-accueil-logo-mug {
-        display: none;
     }
 
     .hero-accueil-copy {
