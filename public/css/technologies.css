@@ -1,0 +1,327 @@
+/* ==========================================================================
+   Page Technologies : hero clair (photo) + grille de technos + bandeau atouts
+   Fichier charge en simple <link> statique (pas de build), voir base.html.twig
+   Reutilise les variables et boutons definis pour l'accueil (voir accueil.css)
+   ========================================================================== */
+
+/* ---------- Hero Technologies ---------- */
+
+.hero-technologies-page {
+    position: relative;
+    overflow: hidden;
+    background: #eef4fb;
+}
+
+@media (min-width: 992px) {
+    .hero-technologies-page {
+        min-height: 420px;
+        padding-top: 12rem;
+        padding-bottom: 5rem;
+    }
+
+    .hero-technologies-page-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url('/images/hero-technologies.jpg');
+        background-size: cover;
+        background-position: right center;
+        z-index: 0;
+    }
+
+    .hero-technologies-page-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(100deg, rgba(255, 255, 255, .95) 0%, rgba(255, 255, 255, .85) 32%, rgba(255, 255, 255, .35) 58%, transparent 74%);
+        pointer-events: none;
+    }
+
+    .hero-technologies-page-container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-technologies-page-copy {
+        max-width: 620px;
+    }
+}
+
+.hero-technologies-page-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
+    color: var(--primary);
+    font-weight: 800;
+    font-size: .78rem;
+    letter-spacing: .14em;
+}
+
+.hero-technologies-page-eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    background: var(--primary);
+}
+
+.hero-technologies-page-title {
+    margin: 1.1rem 0 1.4rem;
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -.03em;
+    font-size: clamp(2.1rem, 3.3vw, 3.1rem);
+    color: var(--dark);
+}
+
+.hero-technologies-page-title span {
+    display: block;
+    background-image: linear-gradient(100deg, #1a63e8 10%, #16c4ea 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-technologies-page-lead {
+    max-width: 480px;
+    color: #4b5768;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 0;
+}
+
+@media (max-width: 991.98px) {
+    .hero-technologies-page {
+        display: flex;
+        flex-direction: column;
+        padding: 6.5rem 0 2.5rem;
+    }
+
+    .hero-technologies-page-bg {
+        order: 2;
+        margin-top: 2rem;
+        height: 220px;
+        background-image: url('/images/hero-technologies.jpg');
+        background-size: cover;
+        background-position: center;
+        border-radius: 14px;
+    }
+
+    .hero-technologies-page-scrim {
+        display: none;
+    }
+
+    .hero-technologies-page-container {
+        order: 1;
+    }
+
+    .hero-technologies-page-copy {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .hero-technologies-page-eyebrow {
+        justify-content: center;
+    }
+
+    .hero-technologies-page-lead {
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* ---------- Grille des technologies ---------- */
+
+.technologies-grid-section {
+    position: relative;
+    overflow: hidden;
+    padding: 3.5rem 0;
+    background: #f8fafd;
+}
+
+.technologies-grid-shape {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37, 99, 235, .1), rgba(37, 99, 235, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.technologies-grid-shape--left {
+    left: -180px;
+    top: -120px;
+}
+
+.technologies-grid-shape--right {
+    right: -180px;
+    bottom: -140px;
+}
+
+.technologies-grid-row {
+    position: relative;
+    z-index: 1;
+}
+
+.technology-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    height: 100%;
+    padding: 1.5rem 1.5rem;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, .06);
+    border-radius: var(--radius, 16px);
+    box-shadow: var(--shadow-soft, 0 10px 30px rgba(15, 23, 42, .08));
+}
+
+.technology-card-logo {
+    flex: 0 0 auto;
+    width: 84px;
+    height: 84px;
+    object-fit: contain;
+}
+
+.technology-card-name {
+    display: block;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: .25rem;
+}
+
+.technology-card-tagline {
+    display: block;
+    color: var(--text-muted);
+    font-size: .9rem;
+    line-height: 1.4;
+}
+
+/* ---------- Bandeau des atouts ---------- */
+
+.technologies-perks-band {
+    position: relative;
+    z-index: 1;
+    margin-top: 1rem;
+    padding: 2.5rem 2rem;
+    background: #eef4fd;
+    border-radius: var(--radius-lg, 24px);
+}
+
+.technologies-perks-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.technology-perk {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0 1.75rem;
+}
+
+.technology-perk + .technology-perk {
+    border-left: 1px solid rgba(37, 99, 235, .18);
+}
+
+.technology-perk-icon {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.technology-perk-icon svg {
+    width: 34px;
+    height: 34px;
+}
+
+.technology-perk-title {
+    display: block;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: .25rem;
+}
+
+.technology-perk-text {
+    display: block;
+    color: var(--text-muted);
+    font-size: .92rem;
+    line-height: 1.5;
+}
+
+/* ---------- Bloc "Toujours à la pointe" (section existante, harmonisée) ---------- */
+
+.technologies-highlight {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+    padding: 1.75rem 2rem;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, .06);
+    border-radius: var(--radius, 16px);
+    box-shadow: var(--shadow-soft, 0 10px 30px rgba(15, 23, 42, .08));
+}
+
+.technologies-highlight-icon {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, .1);
+    color: var(--primary);
+}
+
+.technologies-highlight-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.technologies-highlight strong {
+    display: block;
+    color: var(--dark);
+    margin-bottom: .35rem;
+}
+
+.technologies-highlight p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: .92rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 575.98px) {
+    .technologies-highlight {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.75rem 1.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .technologies-perks-band {
+        padding: 2rem 1.5rem;
+    }
+
+    .technologies-perks-row {
+        grid-template-columns: 1fr;
+        row-gap: 1.75rem;
+    }
+
+    .technology-perk {
+        padding: 0;
+    }
+
+    .technology-perk + .technology-perk {
+        border-left: none;
+        padding-top: 1.75rem;
+        border-top: 1px solid rgba(37, 99, 235, .18);
+    }
+}
