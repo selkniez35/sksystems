@@ -1,0 +1,364 @@
+/* ==========================================================================
+   Page Contact : hero sombre 2 colonnes (infos + formulaire) + bandeau
+   Fichier charge en simple <link> statique (pas de build), voir base.html.twig
+   Reutilise les variables et boutons definis pour l'accueil (voir accueil.css)
+   ========================================================================== */
+
+/* ---------- Hero Contact ---------- */
+
+.hero-contact-page {
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+    background: linear-gradient(160deg, var(--dark) 0%, #132244 55%, #1E3A8A 100%);
+}
+
+@media (min-width: 992px) {
+    .hero-contact-page {
+        padding-top: 12rem;
+        padding-bottom: .5rem;
+    }
+
+    .hero-contact-page-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url('/images/hero-contact.jpg');
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+    }
+
+    .hero-contact-page-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background:
+            linear-gradient(180deg, rgba(4, 9, 22, .12) 0%, rgba(4, 9, 22, .5) 100%),
+            linear-gradient(100deg, rgba(4, 9, 22, .5) 0%, rgba(6, 14, 34, .28) 42%, rgba(6, 14, 34, .08) 62%, transparent 78%);
+        pointer-events: none;
+    }
+
+    .hero-contact-page-container {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .hero-contact-page {
+        padding: 6.5rem 0 3rem;
+    }
+
+    .hero-contact-page-bg,
+    .hero-contact-page-scrim {
+        display: none;
+    }
+}
+
+.hero-contact-page-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
+    color: #7db8ff;
+    font-weight: 800;
+    font-size: .78rem;
+    letter-spacing: .14em;
+}
+
+.hero-contact-page-eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    background: #7db8ff;
+}
+
+.hero-contact-page-title {
+    margin: 1.1rem 0 1.4rem;
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -.03em;
+    font-size: clamp(2.1rem, 3.3vw, 3.1rem);
+    color: #fff;
+}
+
+.hero-contact-page-title span {
+    display: block;
+    background-image: linear-gradient(100deg, #1a63e8 10%, #16c4ea 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-contact-page-lead {
+    max-width: 480px;
+    color: rgba(255, 255, 255, .78);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 1.75rem;
+}
+
+/* ---------- Cartes d'information (effet verre) ---------- */
+
+.hero-contact-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: .85rem;
+    max-width: 440px;
+}
+
+.hero-contact-info-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(15, 23, 42, .45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 14px;
+    text-decoration: none;
+    transition: border-color .2s ease;
+}
+
+a.hero-contact-info-card:hover {
+    border-color: rgba(255, 255, 255, .38);
+}
+
+.hero-contact-info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+}
+
+.hero-contact-info-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.hero-contact-info-text {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-size: .95rem;
+}
+
+.hero-contact-info-text strong {
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 700;
+    margin-bottom: 1px;
+}
+
+/* ---------- Carte formulaire ---------- */
+
+.hero-contact-form-card {
+    position: relative;
+    z-index: 3;
+    background: #fff;
+    border-radius: var(--radius-lg, 24px);
+    box-shadow: var(--shadow-strong, 0 25px 60px rgba(4, 9, 22, .35));
+    padding: 2.25rem 2rem;
+}
+
+@media (min-width: 992px) {
+    .hero-contact-form-card {
+        transform: translateY(48px);
+    }
+}
+
+.hero-contact-form-title {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--dark);
+    margin-bottom: .4rem;
+}
+
+.hero-contact-form-subtitle {
+    color: #56677c;
+    font-size: .92rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-form-success {
+    padding: .85rem 1rem;
+    margin-bottom: 1.25rem;
+    background: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+    border-radius: 10px;
+    font-size: .92rem;
+    font-weight: 600;
+}
+
+.contact-form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+}
+
+@media (max-width: 575.98px) {
+    .contact-form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-form-field label {
+    display: block;
+    margin-bottom: .4rem;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.contact-form-field .form-control,
+.contact-form-field select,
+.contact-form-field textarea,
+.contact-form-field input {
+    width: 100%;
+    padding: .7rem .9rem;
+    background: #eef4fd;
+    border: 1px solid rgba(15, 23, 42, .08);
+    border-radius: 10px;
+    font-size: .95rem;
+    color: var(--dark);
+    transition: border-color .2s ease, background .2s ease;
+}
+
+.contact-form-field textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form-field input:focus,
+.contact-form-field select:focus,
+.contact-form-field textarea:focus {
+    outline: none;
+    background: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.contact-form-field ul {
+    margin: .4rem 0 0;
+    padding-left: 1.1rem;
+    color: #DC2626;
+    font-size: .82rem;
+    line-height: 1.5;
+}
+
+.hero-contact-form-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    width: 100%;
+    padding: .95rem 1.5rem;
+    background: var(--gradient-brand, linear-gradient(135deg, #2563EB, #38BDF8));
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+    box-shadow: 0 12px 24px rgba(37, 99, 235, .3);
+}
+
+.hero-contact-form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px rgba(37, 99, 235, .38);
+}
+
+.hero-contact-form-note {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: .78rem;
+    margin: 0;
+}
+
+/* ---------- Bandeau des engagements ---------- */
+
+.contact-engagement-band {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 0 3.5rem;
+    background: #f8fafd;
+}
+
+@media (max-width: 991.98px) {
+    .contact-engagement-band {
+        padding-top: 3.5rem;
+    }
+}
+
+.contact-engagement-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.contact-engagement-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0 1.75rem;
+}
+
+.contact-engagement-item + .contact-engagement-item {
+    border-left: 1px solid rgba(15, 23, 42, .1);
+}
+
+.contact-engagement-icon {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.contact-engagement-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.contact-engagement-title {
+    display: block;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: .25rem;
+}
+
+.contact-engagement-text {
+    display: block;
+    color: #56677c;
+    font-size: .92rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 767.98px) {
+    .contact-engagement-row {
+        grid-template-columns: 1fr;
+        row-gap: 1.75rem;
+    }
+
+    .contact-engagement-item {
+        padding: 0;
+    }
+
+    .contact-engagement-item + .contact-engagement-item {
+        border-left: none;
+        padding-top: 1.75rem;
+        border-top: 1px solid rgba(15, 23, 42, .1);
+    }
+}

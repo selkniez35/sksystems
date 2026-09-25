@@ -1,0 +1,124 @@
+<section class="hero-contact-page">
+
+    <div class="hero-contact-page-bg" aria-hidden="true"></div>
+    <div class="hero-contact-page-scrim" aria-hidden="true"></div>
+
+    <div class="container hero-contact-page-container">
+        <div class="row g-4 g-lg-5 align-items-start">
+
+            <div class="col-lg-6">
+                <span class="hero-contact-page-eyebrow">CONTACT</span>
+
+                <h1 class="hero-contact-page-title">
+                    Un projet ?
+                    <span>Discutons-en</span>
+                </h1>
+
+                <p class="hero-contact-page-lead">
+                    Vous avez une idée, un besoin ou un projet de site web, d'application
+                    ou de MVP ? Je suis à votre écoute pour en discuter et vous proposer
+                    la solution la plus adaptée.
+                </p>
+
+                <div class="hero-contact-info-list">
+
+                    <a href="tel:+33755464376" class="hero-contact-info-card">
+                        <span class="hero-contact-info-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6.3 6.3l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2.1z"/></svg>
+                        </span>
+                        <span class="hero-contact-info-text">
+                            <strong>Téléphone</strong>
+                            07 55 46 43 76
+                        </span>
+                    </a>
+
+                    <a href="mailto:samy.elkniez@sksystems.fr" class="hero-contact-info-card">
+                        <span class="hero-contact-info-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+                        </span>
+                        <span class="hero-contact-info-text">
+                            <strong>Email</strong>
+                            samy.elkniez@sksystems.fr
+                        </span>
+                    </a>
+
+                    <a href="{{ path('app_home') }}" class="hero-contact-info-card">
+                        <span class="hero-contact-info-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg>
+                        </span>
+                        <span class="hero-contact-info-text">
+                            <strong>Site web</strong>
+                            sksystems.fr
+                        </span>
+                    </a>
+
+                    <div class="hero-contact-info-card hero-contact-info-card--static">
+                        <span class="hero-contact-info-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </span>
+                        <span class="hero-contact-info-text">
+                            <strong>Localisation</strong>
+                            Rennes, France
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="hero-contact-form-card">
+
+                    <h2 class="hero-contact-form-title">Envoyez un message</h2>
+                    <p class="hero-contact-form-subtitle">Remplissez le formulaire et je vous réponds dans les plus brefs délais.</p>
+
+                    {% for message in app.flashes('contact_success') %}
+                        <div class="contact-form-success" role="status">{{ message }}</div>
+                    {% endfor %}
+
+                    {{ form_start(contactForm, {'attr': {'class': 'contact-form-grid', 'novalidate': 'novalidate'}}) }}
+
+                        <div class="contact-form-row">
+                            <div class="contact-form-field">
+                                {{ form_label(contactForm.name) }}
+                                {{ form_widget(contactForm.name) }}
+                                {{ form_errors(contactForm.name) }}
+                            </div>
+                            <div class="contact-form-field">
+                                {{ form_label(contactForm.email) }}
+                                {{ form_widget(contactForm.email) }}
+                                {{ form_errors(contactForm.email) }}
+                            </div>
+                        </div>
+
+                        <div class="contact-form-field">
+                            {{ form_label(contactForm.subject) }}
+                            {{ form_widget(contactForm.subject) }}
+                            {{ form_errors(contactForm.subject) }}
+                        </div>
+
+                        <div class="contact-form-field">
+                            {{ form_label(contactForm.message) }}
+                            {{ form_widget(contactForm.message, {'attr': {'rows': 5}}) }}
+                            {{ form_errors(contactForm.message) }}
+                        </div>
+
+                        <div class="field-honeypot" aria-hidden="true">
+                            {{ form_label(contactForm.website) }}
+                            {{ form_widget(contactForm.website) }}
+                        </div>
+
+                        <button type="submit" class="hero-contact-form-submit">
+                            Envoyer ma demande <span aria-hidden="true">→</span>
+                        </button>
+
+                        <p class="hero-contact-form-note">Vos données sont utilisées uniquement pour répondre à votre demande.</p>
+
+                    {{ form_end(contactForm) }}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
