@@ -333,3 +333,69 @@
         height: 180px;
     }
 }
+
+/* ---------- Tarif (TJM) ---------- */
+
+.services-rate {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 1.5rem 1.75rem;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, .06);
+    border-radius: var(--radius, 16px);
+    box-shadow: var(--shadow-soft, 0 10px 30px rgba(15, 23, 42, .08));
+}
+
+.services-rate-label {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: .78rem;
+    letter-spacing: .14em;
+}
+
+.services-rate-text p {
+    margin: .35rem 0 0;
+    color: #4b5768;
+}
+
+.services-rate-price {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.services-rate-price strong {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    background-image: linear-gradient(100deg, #1a63e8 10%, #16c4ea 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.services-rate-price span {
+    color: var(--dark);
+    font-weight: 700;
+}
+
+.services-rate-price small {
+    display: block;
+    color: var(--text-muted);
+    font-size: .75rem;
+}
+
+@media (max-width: 767.98px) {
+    .services-rate {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .services-rate-price {
+        text-align: left;
+    }
+}
